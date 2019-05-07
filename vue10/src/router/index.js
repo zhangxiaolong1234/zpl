@@ -8,8 +8,6 @@ import Mine from '../components/Mine';
 export default new Router({
   routes: [
     {path:'/',redirect:'/home'},
-    {path:'/home',component:Home},
-    {path:'/product',component:Product},
-    {path:'/mine',component:Mine}
+    {path:'/home',component:Home}
   ]
 })

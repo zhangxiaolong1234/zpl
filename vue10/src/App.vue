@@ -1,8 +1,6 @@
 <template>
     <div id="app">
-      <MyHeader></MyHeader>
       <router-view/>
-      <MyFooter></MyFooter>
     </div>
 </template>
 
@@ -11,7 +9,6 @@ import MyHeader from "./components/MyHeader";
 import MyFooter from "./components/MyFooter";
 export default {
   name: 'App',
-  components: {MyFooter, MyHeader}
 }
 </script>
 
