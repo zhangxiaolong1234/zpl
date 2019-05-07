@@ -1,4 +1,3 @@
-<script src="../../../resize.js"></script>
 <template>
     <div id="app">
       <router-view/>
@@ -7,12 +6,13 @@
 
 <script>
   import resize from './js/resize';
-export default {
-  name: 'App',
-}
+  export default {
+    name: 'App',
+  }
 </script>
 
 <style>
+  @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
   * {
     margin: 0;
     padding: 0;
