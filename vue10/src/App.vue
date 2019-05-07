@@ -1,3 +1,4 @@
+<script src="../../../resize.js"></script>
 <template>
     <div id="app">
       <router-view/>
@@ -5,6 +6,7 @@
 </template>
 
 <script>
+  import resize from './js/resize';
 export default {
   name: 'App',
 }
