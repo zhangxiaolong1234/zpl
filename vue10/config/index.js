@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/v1' :{
+        target:'http://cangdu.org:8001',
+        changeOrigin: true
+      },
+      '/v2' :{
+        target:'http://cangdu.org:8001',
+        changeOrigin: true
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
