@@ -1,0 +1,261 @@
+<template>
+    <div class="p1">
+        <!--头部,展示子组件-->
+      <router-view></router-view>
+      <!--第一导航栏部分-->
+      <div class="zplson1">
+        <router-link :to="{}"><</router-link>
+        <span class="zpl1">我的</span>
+      </div>
+      <!--头像部分-->
+      <div class="p2">
+          <div class="p3"><img src="###" alt="" class="el-icon-user-solid"></div>
+          <div class="p4">
+            <span><router-link :to="{path:'/register'}">登录/注册</router-link></span>
+            <span class="el-icon-mobile-phone">暂无绑定手机号</span>
+          </div>
+        <div class="p5"><router-link :to="{path:'/wode/info'}">></router-link></div>
+
+      </div>
+
+      <!-- banner区域 -->
+      <div class="banner">
+        <!-- 左边余额 -->
+        <div class="ban_left">
+          <!-- 非固定值会替换 -->
+         <router-link :to="{path:'/balance'}">
+           <b class="ban_b1">0.00</b>
+           <span>元</span>
+           <br>
+           <span>我的余额</span>
+         </router-link>
+        </div>
+        <!-- 中间优惠 -->
+        <div class="ban_middle">
+          <router-link :to="{path:'/benefit'}">
+            <b class="ban_b2">0</b>
+            <span>个</span>
+            <br>
+            <span>我的优惠</span>
+          </router-link>
+        </div>
+        <!-- 右边积分 -->
+        <div class="ban_right">
+         <router-link :to="{path:'/integral'}"> <b class="ban_b3">0</b>
+           <span>分</span>
+           <br>
+           <span>我的积分</span>
+         </router-link>
+        </div>
+      </div>
+
+      <!--<ul>-->
+        <!--<li class="el-icon-s-unfold">我的订单</li>-->
+        <!--<li class="el-icon-s-goods">积分商城</li>-->
+        <!--<li class="el-icon-potato-strips">饿了么会员卡</li>-->
+      <!--</ul>-->
+     <div class="p6">
+       <div  class="el-icon-s-unfold">
+         <router-link :to="{path:''}">我的订单</router-link>
+         <span>></span>
+       </div>
+       <br>
+       <div  class="el-icon-s-goods">
+         <router-link :to="{path:''}">积分商城</router-link>
+         <span>></span>
+       </div>
+       <br>
+       <div  class="el-icon-potato-strips">
+         <router-link :to="{path:''}">饿了么会员卡</router-link>
+         <span>></span>
+       </div>
+     </div>
+      <!--服务中心-->
+      <div class="p7">
+        <div  class="el-icon-s-goods">
+          <router-link :to="{path:''}">积分商城</router-link>
+          <span>></span>
+        </div>
+        <br>
+        <div  class="el-icon-s-goods">
+          <router-link :to="{path:''}">积分商城</router-link>
+          <span>></span>
+        </div>
+      </div>
+    </div>
+</template>
+
+<script>
+    import Info from "./Info";
+    export default {
+        name: "Wode",
+      components: {Info},
+    }
+</script>
+
+<style scoped>
+.p1{
+  width: 100%;
+  height: 100%;
+  background: gainsboro;
+}
+.zplson1{
+  width: 100%;
+  height: 10%;
+  background:#3190e8;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 3rem;
+}
+.zplson1 a{
+  width: 10%;
+  height: 100%;
+  display: block;
+  color: white;
+  font-size: 1.3rem;
+  float:left;
+  /*background: blue;*/
+}
+.zpl1{
+  width: 50%;
+  height: 100%;
+  font-size: 1rem;
+  color: white;
+  float:left;
+  margin-left: 2rem;
+}
+  .p2{
+    width: 100%;
+    height: 15%;
+    background:#3190e8 ;
+  }
+  .p3{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: white;
+    text-align: center;
+    line-height: 2.5rem;
+    float: left;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+  }
+  .p4{
+    width: 50%;
+    height: 60%;
+    /*background: hotpink;*/
+    font-size: 0.7rem;
+    float: left;
+    margin-top: 1rem;
+    margin-left: 0.3rem;
+  }
+  .p4 a{
+    color: white;
+    font-size: 1rem;
+  }
+  .p5 a{
+    font-size: 1rem;
+    float: right;
+    color: white;
+    margin-top: 1.5rem;
+  }
+.bg-purple a{
+  font-size: 1rem;
+  color: orangered;
+  text-align: center;
+}
+.bg-purple-light a{
+  font-size: 1rem;
+  color: lightcoral;
+  text-align: center;
+}
+.bg-purple a{
+  font-size: 1rem;
+  color: green;
+  text-align: center;
+}
+  /*.bg-purple-light{*/
+    /*!*border-left: 1px solid ghostwhite;*!*/
+  /*}*/
+  .grid-content p{
+    font-size: 0.5rem;
+    color: black;
+    text-align: center;
+  }
+  .p6{
+    width: 100%;
+    height: 15%;
+    background: white;
+    margin-top: 0.5rem;
+  }
+  .p6 div{
+    width: 100%;
+    border-bottom: 1px solid grey;
+    font-size: 0.8rem;
+    color: #000;
+  }
+  .p7{
+    background: white;
+    margin-top: 0.7rem;
+  }
+.p7 div{
+  width: 100%;
+  border-bottom: 1px solid grey;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #000;
+}
+  .p6 span{
+      position: absolute;
+      right: 0.25rem;
+      color: grey;
+    }
+.p7 span{
+  position: absolute;
+  right: 0.25rem;
+  color: grey;
+}
+  a{
+    text-decoration: none;
+  }
+/* banner */
+.banner{
+  width: 100%;
+  height: 4.5rem;
+  overflow: hidden;
+}
+.ban_left,.ban_middle,.ban_right{
+  width: 33.33%;
+  height: 100%;
+  float: left;
+  text-align: center;
+  padding-top: 1rem;
+  background-color: #ffffff;
+}
+.ban_middle{
+  border-left: 1px solid #f5f5f5;
+  border-right: 1px solid #f5f5f5;
+}
+.ban_b1,.ban_b2,.ban_b3{
+  font-weight: 700;
+  font-size: 1rem;
+}
+.ban_b1{
+  color: orangered;
+}
+.ban_b2{
+  color: red;
+}
+.ban_b3{
+  color: green;
+}
+.banner span{
+  font-size: 0.8rem;
+}
+/* 分割 */
+.part{
+  width: 100%;
+  height: 1rem;
+}
+
+</style>
