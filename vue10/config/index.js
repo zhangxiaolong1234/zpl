@@ -18,6 +18,10 @@ module.exports = {
       '/v2' :{
         target:'http://cangdu.org:8001',
         changeOrigin: true
+      },
+      '/v3':{
+        target:'http://cangdu.org:8001',
+        changeOrigin: true
       }
     },
 
