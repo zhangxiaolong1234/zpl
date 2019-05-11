@@ -8,7 +8,7 @@
   import resize from './js/resize';
   export default {
     name: 'App',
-    components: {Service},
+    components: {Wode},
   }
 </script>
 
