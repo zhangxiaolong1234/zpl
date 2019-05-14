@@ -10,10 +10,10 @@
       <div class="l2">
         <div class="l3">
           <p>当前积分</p>
-          <router-link :to="{path:'/integral/balancecard'}" class="el-icon-question">积分说明</router-link>
+          <router-link :to="{path:'/integralcard'}" class="el-icon-question">积分说明</router-link>
           <router-view></router-view>
         </div>
-        <div class="l4">0 <span>分</span></div>
+        <div class="l4"><span>0</span> <span>分</span></div>
         <div class="l5">积分兑换商品</div>
       </div>
     </div>
@@ -26,6 +26,12 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  //小图标
+  import ElementUI from 'element-ui';
+  import 'element-ui/lib/theme-chalk/index.css';
+
+  Vue.use(ElementUI);
     export default {
         name: "Integral",
       data(){
@@ -44,7 +50,7 @@
   }
   .zplson1{
     width: 100%;
-    height: 40%;
+    height: 55%;
     background:#3190e8;
     font-size: 1rem;
     text-align: center;
@@ -116,6 +122,7 @@
     position: absolute;
     top: 8rem;
     left: 1.8rem;
+    margin-top: 0.5rem;
     line-height:2rem;
     border-radius: 4%;
   }

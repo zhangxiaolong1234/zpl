@@ -28,15 +28,18 @@
             </div>
           </div>
 
-          <mt-field label="验证码">
+          <!--<mt-field>-->
             <!--<img src="###" height="45px" width="100px">-->
             <!--<span>看不清<br/>-->
               <!--再换一张</span>-->
-            <div>
-              <img  v-html="captchaCodeImg" :src="captchaCodeImg" height="45px" width="60px">
-              <span @click="getCaptchaCode">看不清换一张</span>
+            <div class="zpl0">
+              <div class="zpl00">
+                <input type="text" placeholder="验证码" v-model="yanZhengMa">
+                <img  v-html="captchaCodeImg" :src="captchaCodeImg" height="20rem" width="50rem">
+                <span class="zpl000" @click="getCaptchaCode">看不清换一张</span>
+              </div>
             </div>
-          </mt-field>
+          <!--</mt-field>-->
         </section>
       </form>
 <!--注册页面-->
@@ -47,11 +50,11 @@
       </div>
 
       <!--第四部分,登录按钮-->
-      <button class="btn btn-primary btn-lg"style="width: 15rem" @click="login">登录</button>
+      <button class="btn btn-primary btn-lg"style="width: 15rem;background: green" @click="login">登录</button>
       <div class="zpl7">
        <router-link :to="{path:'/reset'}">重置密码?</router-link>
        <div class="zpl8" v-if=" showAlert">
-         <div class="el-icon-warning"></div>
+         <img src="../images/images/警告.png" alt="">
          <div v-text="alertText"></div>
          <button style="width: 12rem;background: green" @click="aaa">确认</button>
        </div>
@@ -61,39 +64,72 @@
 
 <script>
   import Vue from 'vue'
-    export default {
+  import axios from 'axios'
+  import VueAxios from 'vue-axios'
+  Vue.use(VueAxios, axios)
+
+  export default {
         name: "Register",
       data(){
           return{
             // loginWay: false, //登录方式，默认短信登录
             username:'',//用户名
             passWord:'',//密码
+            yanZhengMa:'',//验证码
             showPassword:false,//是否显示密码
             val:false,//点击滑块
-            showAlert: false, //显示提示组件
+            showAlert: false, //显示提示框组件
             alertText: null, //提示的内容
             captchaCodeImg: null, //验证码地址
+            obj:{},//用于判断存储密码虽然输入,但是输入的值不正确
           }
       },
       methods:{
           login(){
-            if(this.username == ''&& this.passWord == '' && this.val == '' ){
+            if(this.username == ''&& this.passWord == '' && this.yanZhengMa == '' ){
               this.showAlert = true;
               this.alertText = '请输入账号/密码/验证码';
-            }else if(this.username == '' && this.passWord != ''&& this.val != ''){
+            }else if(this.username == '' && this.passWord != ''&& this.yanZhengMa != ''){
 
               this.showAlert = true;
               this.alertText = '请输入账号';
-            }else if(this.username != ''&& this.passWord == '' && this.val != ''){
+            }else if(this.username != ''&& this.passWord == '' && this.yanZhengMa != ''){
               this.showAlert = true;
               this.alertText = '请输入密码';
-            }else if(this.username != ''&& this.passWord != '' && this.val == ''){
+            }else if(this.username != ''&& this.passWord != '' && this.yanZhengMa == ''){
               this.showAlert = true;
               this.alertText = '请输入验证码';
+            } else if(this.username != "" &&
+              this.passWord != "" &&
+              this.yanZhengMa != ""){
+              // 向后台发送请求,获取后台数据,并保存到数据库内
+              Vue.axios.post('https://elm.cangdu.org/v2/login',{
+                'username':this.username,
+                'password':this.passWord,
+                'captcha_code':this.yanZhengMa,
+              }).then((res)=>{
+                  if (res.data){
+                    console.log(res.data);
+                    this.$router.go(-1);
+                  }else {
+                    this.showAlert = true;
+                    this.alertText = res.data.message;
+                  }
+                console.log(res.data.username);
+                this.$router.push({path:"/wode",query:{name:this.username}});
+              }).catch((err)=>{
+                console.log('请求错误',err);
+              });
             }
+
           },
         aaa(){
           this.showAlert = !this.showAlert;
+          //请求验证码
+          Vue.axios.post('https://elm.cangdu.org/v1/captchas').then((res)=>{
+            this.captchaCodeImg = res.data.code;
+            // console.log(res.data);
+          })
         },
         changePassword(){
             this.showPassword = !this.showPassword;
@@ -104,18 +140,18 @@
            //请求验证码
            Vue.axios.post('https://elm.cangdu.org/v1/captchas').then((res)=>{
              this.captchaCodeImg = res.data.code;
-             console.log(res.data);
+             // console.log(res.data);
            })
          },
-
       },
       mounted(){
         //请求验证码
         Vue.axios.post('https://elm.cangdu.org/v1/captchas').then((res)=>{
           this.captchaCodeImg = res.data.code;
-          console.log(res.data);
-        })
-      }
+          // console.log(res.data);
+        });
+
+      },
     }
 </script>
 
@@ -127,7 +163,7 @@
 }
   .zplson1{
     width: 100%;
-    height: 10%;
+    height: 3rem;
     background:#3190e8;
     font-size: 1rem;
     text-align: center;
@@ -171,6 +207,20 @@
   border-bottom: 1px solid gray;
   /*background: yellow;*/
 }
+.zpl0{
+  width: 100%;
+  height: 3rem;
+}
+input{
+  width: 8rem;
+}
+.zpl00{
+  line-height: 2.5rem;
+}
+img{
+  width: 3rem;
+  height: 1.5rem;
+}
 .zpl3-1{
   float: right;
 }
@@ -186,6 +236,9 @@
     color: red;
     margin-left: 0.5rem;
     margin-top: 0.3rem;
+  }
+  .zpl000{
+    font-size: 0.7rem;
   }
   .zpl6{
     font-size: 0.7rem;
@@ -204,15 +257,21 @@ button{
 }
   .zpl8{
     width: 12rem;
-    height: 10rem;
+    height: 8.5rem;
     background: white;
     position: absolute;
-    left: 3rem;
-    bottom: 10rem;
+    left: 2.5rem;
+    bottom: 8rem;
+    text-align: center;
   }
   .zpl8 button{
+    color: white;
     position: absolute;
     right: 0;
     bottom: 0;
+  }
+  .zpl8 img{
+    width: 35%;
+    height: 4rem;
   }
 </style>

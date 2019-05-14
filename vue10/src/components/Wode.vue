@@ -1,7 +1,9 @@
 <template>
     <div class="p1">
-        <!--头部,展示子组件-->
+      <!--<Benefit></Benefit>-->
       <router-view></router-view>
+        <!--头部,展示子组件-->
+      <div>
       <!--第一导航栏部分-->
       <div class="zplson1">
         <router-link :to="{}"><</router-link>
@@ -9,9 +11,10 @@
       </div>
       <!--头像部分-->
       <div class="p2">
-          <div class="p3"><img src="###" alt="" class="el-icon-user-solid"></div>
+          <div class="p3"><img src="../images/images/8.png" alt=""></div>
           <div class="p4">
-            <span><router-link :to="{path:'/register'}">登录/注册</router-link></span>
+            <span><router-link :to="{path:'/register'}">{{flag}}</router-link></span>
+            <!--<div v-else></div>-->
             <span class="el-icon-mobile-phone">暂无绑定手机号</span>
           </div>
         <div class="p5"><router-link :to="{path:'/wode/info'}">></router-link></div>
@@ -33,7 +36,7 @@
         <!-- 中间优惠 -->
         <div class="ban_middle">
           <router-link :to="{path:'/benefit'}">
-            <b class="ban_b2">0</b>
+            <b class="ban_b2">{{$store.state.youhui.length}}</b>
             <span>个</span>
             <br>
             <span>我的优惠</span>
@@ -83,13 +86,41 @@
         </div>
       </div>
     </div>
+    </div>
 </template>
 
 <script>
     import Info from "./Info";
+    import Vue from 'vue'
+    //小图标
+    import ElementUI from 'element-ui';
+    import 'element-ui/lib/theme-chalk/index.css';
+    import Benefit from "./Benefit";
+
+    Vue.use(ElementUI);
     export default {
         name: "Wode",
-      components: {Info},
+      data(){
+          return{
+            name:null,
+            flag:null,
+          }
+      },
+      mounted(){
+          Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
+            console.log(res.data.username);
+            this.name = res.data.username;
+            if(this.name = ''){
+                this.flag = '注册/登录'
+            }else{
+              this.flag = res.data.username;
+            }
+
+          }).catch((err)=>{
+            console.log('请求错误',err);
+          })
+      },
+      components: {Benefit, Info},
     }
 </script>
 
@@ -98,6 +129,12 @@
   width: 100%;
   height: 100%;
   background: gainsboro;
+  position: absolute;
+  letf:0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  overflow: hidden;
 }
 .zplson1{
   width: 100%;
@@ -105,7 +142,8 @@
   background:#3190e8;
   font-size: 1rem;
   text-align: center;
-  line-height: 3rem;
+  line-height: 2rem;
+  overflow: hidden;
 }
 .zplson1 a{
   width: 10%;
@@ -117,28 +155,29 @@
   /*background: blue;*/
 }
 .zpl1{
-  width: 50%;
+  width: 80%;
   height: 100%;
   font-size: 1rem;
   color: white;
   float:left;
-  margin-left: 2rem;
+
 }
   .p2{
     width: 100%;
-    height: 15%;
     background:#3190e8 ;
   }
   .p3{
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background: white;
+
     text-align: center;
     line-height: 2.5rem;
     float: left;
     margin-top: 1rem;
     margin-left: 0.5rem;
+  }
+ .p3 img{
+   width: 2.5rem;
+   height: 2.5rem;
+   border-radius: 50%;
   }
   .p4{
     width: 50%;

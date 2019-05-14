@@ -3,59 +3,52 @@
       <div class="zplson1">
         <!-- < 按钮部分-->
         <div class="l1">
-          <router-link :to="{path:'/integral'}"><</router-link>
+          <router-link :to="{path:'/balance'}"><</router-link>
           <span class="zpl1">余额问题</span>
         </div>
-        <ul><li v-for="item in arr">
-          {{item}}
-        </li></ul>
-      </div>
+        <ul>
+          <li>
+          <!--{{item}}-->
+          <h3>Q1: 使用余额的条件</h3>
+          <p>为了保护账户安全,使用余额前必须先绑定手机号</p>
 
-      <div class="zplson1">
-        <!-- < 按钮部分-->
-        <div class="l1">
-          <router-link :to="{path:'/balance'}"><</router-link>
-          <span class="zpl1">积分问题</span>
-        </div>
-        <ul><li v-for="it in arr1">
-          {{it}}
-        </li></ul>
+        </li>
+          <li>
+            <h3>Q2: 余额可以怎么用？</h3>
+            <p>余额可以在饿了么平台上提现，当余额大于等于待支付金额时可以在支持在线支付的商家中进行消费。提现功能将于2016年12月25日00:00全面开放。</p>
+          </li>
+          <li>
+          <h3>Q3:我要如何提现？</h3>
+          <p>为了保护账户和资金安全，您在提现前需要输入真实姓名和用该姓名开通的银行卡号、选择开户行，并验证已绑定饿了么账号的手机号。每日只能提现1次，每次限额50元。若提现金额超过50元，点击【提现】时系统会提示您已超额，请您修改提现金额。</p>
+          </li>
+          <li>
+            <h3>Q4:为什么会提现失败？</h3>
+            <p>可能原因有：您的姓名、开户行、银行卡号等信息不匹配；您当日的提现次数和金额超过限制；您的账户存在异常，被风控拦截。</p>
+          </li>
+        </ul>
       </div>
     </div>
 </template>
 
 <script>
   import Vue from 'vue'
+  import axios from 'axios'
+  import VueAxios from 'vue-axios'
+  Vue.use(VueAxios, axios)
     export default {
         name: "Balancecard",
-      data(){
-          return{
-            val:'',//空字符串用于余额问题
-            arr:[],//空数组添加空字符串的内容
-
-            val1:'',//空字符串用于积分问题
-            arr1:[],//空字符串用于积分问题
-
-          }
-      },
-      mounted(){
-          Vue.axios.get('https://elm.cangdu.org/v3/profile/explain',).then((res)=>{
-           this.val =  res.data.balanceContent;
-           console.log(res);
-            this.val1 =  res.data.pointtextContent;
-           let array = this.arr.push(this.val);
-           let array1 = this.arr1.push(this.val1);
-            console.log(this.arr);
-          });
-      },
     }
 </script>
 
 <style scoped>
+  *{
+    padding: 0;
+    margin: 0;
+  }
   .balancecard{
     width: 100%;
     height: 100%;
-    background: gainsboro;
+    background: white;
     position: absolute;
     left: 0;
     right: 0;
@@ -64,7 +57,7 @@
   }
   .zplson1{
     width: 100%;
-    height: 10%;
+    height: 2rem;
     background:#3190e8;
     font-size: 1rem;
     text-align: center;
@@ -79,7 +72,22 @@
   .l1 span{
     color: white;
   }
-  li{
-    padding: 1rem;
+  ul li {
+    list-style: none;
+    line-height: 1rem;
+    text-align: left;
+    background: white;
+    padding-left: 0.5rem;
+    margin-top: 0.5rem;
   }
+  ul h3{
+    width: 100%;
+    font-size: 0.7rem;
+    padding-top: 0.5rem;
+  }
+  ul p{
+    font-size: 0.5rem;
+    padding-top:0 .5rem;
+  }
+
 </style>

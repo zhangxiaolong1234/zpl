@@ -7,13 +7,13 @@
           </div>
       <!--中间输入框部分-->
       <div class="z2">
-        <el-input
+        <input
           style="width: 11rem"
         placeholder="请输入商家或美食名称"
         v-model="searchValue"
         clearable>
-      </el-input>
-        <el-button type="primary" @click="getInput()">提交</el-button></div>
+      </input>
+        <button class="z11" type="primary" @click="getInput()">提交</button></div>
       <!--显示商家部分-->
       <div class="z2" v-if="shor">
         商家
@@ -62,8 +62,8 @@
             list: [], // 搜索返回的结果
             showHistory: true, // 是否显示历史记录，只有在返回搜索结果后隐藏
             emptyResult: false, // 搜索结果为空时显示
-            shor:true,//搜索到的商家
-            noSeek:false,//显示无搜索结果
+            shor:false,//搜索到的商家
+            noSeek:true,//显示无搜索结果
             aaa:false,//刷新页面时搜索历史和清空历史为false
             geohash:'34.74725,113.624931'
           }
@@ -109,7 +109,7 @@
 }
   .z1{
     width: 100%;
-    height: 7%;
+    height: 2rem;
     background: #3190e8;
   }
   .z1 a{
@@ -129,14 +129,16 @@
 
 .z2{
   width: 100%;
-  height: 10%;
+  height: 2rem;
   /*background:yellow;*/
   font-size: 0.6rem;
-  line-height: 2rem;
+  line-height: 1rem;
   text-indent: 0.5rem;
-  font-weight: bold;
+  /*font-weight: bold;*/
+  margin-top: 1rem;
   color: #666;
 }
+
 .z3{
   width: 100%;
   height: 80%;
@@ -165,7 +167,7 @@ span{
 }
   .z6{
     width: 100%;
-    height: 6%;
+    height: 2rem;
     background: white;
     font-size: 0.6rem;
     line-height: 2rem;
@@ -173,7 +175,7 @@ span{
     font-weight: bold;
     color: #666;
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0.1rem;
   }
   .z7{
     width: 100%;
@@ -208,5 +210,8 @@ span{
     background: white;
     text-align: center;
     color: deepskyblue;
+  }
+  .z11{
+    background: #3190e8;
   }
 </style>

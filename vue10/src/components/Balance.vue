@@ -15,7 +15,7 @@
              <!--<Balancecard></Balancecard>-->
               <router-view></router-view>
             </div>
-            <div class="l4">0.00 <span>元</span></div>
+            <div class="l4"><span>0.00</span> <span>元</span></div>
             <div class="l5">提现</div>
         </div>
       </div>
@@ -28,7 +28,13 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import Balancecard from './Balancecard'
+  //小图标
+  import ElementUI from 'element-ui';
+  import 'element-ui/lib/theme-chalk/index.css';
+
+  Vue.use(ElementUI);
     export default {
         name: "Balance",
       data(){
@@ -47,7 +53,7 @@
   }
   .zplson1{
     width: 100%;
-    height: 40%;
+    height: 50%;
     background:#3190e8;
     font-size: 1rem;
     text-align: center;
