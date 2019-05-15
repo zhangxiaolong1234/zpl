@@ -17,6 +17,24 @@ axios.defaults.withCredentials = true
 const store = new Vuex.Store({
   state:{
     youhui:[],//有几张优惠券
+    user_name: '',
+    addlist:[],
+    AddArr:{}
+  },
+  mutations: {
+    SetMsg(state, user_name) {
+      state.user_name = user_name
+    }
+  },
+  getters: {
+    GetMsg:(state)=>{
+      return state.user_name
+    }
+  },
+  actions: {
+    SetMsg(state, user_name) {
+      store.commit("SetMsg", user_name)
+    }
   }
 })
 new Vue({

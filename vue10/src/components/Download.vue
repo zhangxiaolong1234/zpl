@@ -2,7 +2,7 @@
     <div class="download">
       <!--第一导航栏部分-->
       <div class="zplson1">
-        <router-link :to="{path:'/benefit'}"><</router-link>
+        <router-link :to="{path:'/wode'}"><</router-link>
         <span class="zpl1">下载</span>
       </div>
       <div class="zpl2">
@@ -86,12 +86,14 @@
     margin-top: 0.5rem;
   }
   .zpl3 {
-    width: 80%;
+    background-color: #4cd964;
+    font-size: .7rem;
+    color: #fff;
     text-align: center;
-    line-height: 2rem;
-    background: #4cd964;
-    margin: 1.5rem;
-    border-radius: 5%;
+    margin: 0 .7rem;
+    line-height: 1.8rem;
+    border-radius: .2rem;
+    margin-top: .5rem;
   }
   .zpl4{
     width: 60%;

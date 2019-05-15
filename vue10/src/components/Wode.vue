@@ -15,7 +15,7 @@
           <div class="p4">
             <span><router-link :to="{path:'/register'}">{{flag}}</router-link></span>
             <!--<div v-else></div>-->
-            <span class="el-icon-mobile-phone">暂无绑定手机号</span>
+            <p class="el-icon-mobile-phone" >暂无绑定手机号</p>
           </div>
         <div class="p5"><router-link :to="{path:'/wode/info'}">></router-link></div>
 
@@ -51,12 +51,6 @@
          </router-link>
         </div>
       </div>
-
-      <!--<ul>-->
-        <!--<li class="el-icon-s-unfold">我的订单</li>-->
-        <!--<li class="el-icon-s-goods">积分商城</li>-->
-        <!--<li class="el-icon-potato-strips">饿了么会员卡</li>-->
-      <!--</ul>-->
      <div class="p6">
        <div  class="el-icon-s-unfold">
          <router-link :to="{path:''}">我的订单</router-link>
@@ -76,12 +70,12 @@
       <!--服务中心-->
       <div class="p7">
         <div  class="el-icon-s-goods">
-          <router-link :to="{path:''}">积分商城</router-link>
+          <router-link :to="{path:'/service'}">服务中心</router-link>
           <span>></span>
         </div>
         <br>
         <div  class="el-icon-s-goods">
-          <router-link :to="{path:''}">积分商城</router-link>
+          <router-link :to="{path:'/download'}">下载饿了吗App</router-link>
           <span>></span>
         </div>
       </div>
@@ -104,6 +98,7 @@
           return{
             name:null,
             flag:null,
+            phoneNumb:'暂无手机号'
           }
       },
       mounted(){
@@ -128,7 +123,7 @@
 .p1{
   width: 100%;
   height: 100%;
-  background: gainsboro;
+  background-color: #f5f5f5;
   position: absolute;
   letf:0;
   right: 0;
@@ -152,7 +147,6 @@
   color: white;
   font-size: 1.3rem;
   float:left;
-  /*background: blue;*/
 }
 .zpl1{
   width: 80%;
@@ -164,6 +158,7 @@
 }
   .p2{
     width: 100%;
+    height: 4rem;
     background:#3190e8 ;
   }
   .p3{
@@ -180,7 +175,7 @@
    border-radius: 50%;
   }
   .p4{
-    width: 50%;
+    width: 60%;
     height: 60%;
     /*background: hotpink;*/
     font-size: 0.7rem;
@@ -188,9 +183,15 @@
     margin-top: 1rem;
     margin-left: 0.3rem;
   }
+  .p4 span{
+    display: block;
+  }
   .p4 a{
     color: white;
     font-size: 1rem;
+  }
+  .p5{
+    padding-right: .3rem;
   }
   .p5 a{
     font-size: 1rem;
@@ -213,9 +214,7 @@
   color: green;
   text-align: center;
 }
-  /*.bg-purple-light{*/
-    /*!*border-left: 1px solid ghostwhite;*!*/
-  /*}*/
+
   .grid-content p{
     font-size: 0.5rem;
     color: black;
@@ -229,7 +228,7 @@
   }
   .p6 div{
     width: 100%;
-    border-bottom: 1px solid grey;
+    border-bottom: 2px solid #f5f5f5;
     font-size: 0.8rem;
     color: #000;
   }
@@ -239,7 +238,7 @@
   }
 .p7 div{
   width: 100%;
-  border-bottom: 1px solid grey;
+  border-bottom: 2px solid #f5f5f5;
   margin-top: 1rem;
   font-size: 0.8rem;
   color: #000;

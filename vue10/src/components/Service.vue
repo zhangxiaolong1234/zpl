@@ -1,7 +1,7 @@
 <template>
   <div class="service">
     <div id="head_top">
-      <span class="more"> < </span>
+      <router-link :to="{path:'/wode'}"><span class="more"> < </span></router-link>
       <span class="title">服务中心</span>
     </div>
     <div class="content">

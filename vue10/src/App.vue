@@ -57,4 +57,10 @@
     width: 100%;
     height: 100%;
   }
+  a:active{
+    text-decoration: none;
+  }
+  a:visited{
+    text-decoration: none;
+  }
 </style>

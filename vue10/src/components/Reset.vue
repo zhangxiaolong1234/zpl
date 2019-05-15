@@ -2,7 +2,8 @@
     <div class="reset">
         <!--第一导航栏部分-->
         <div class="zplson1">
-          <router-link :to="{path:'register'}"><</router-link>
+          <a @click="backUp"> < </a>
+          <!--<router-link :to="{path:'register'}"><</router-link>-->
           <span class="zpl1">重置密码</span>
         </div>
       <!--表单部分-->
@@ -66,6 +67,9 @@
       })
     },
     methods:{
+          backUp(){
+            this.$router.go(-1);
+          },
         login(){
           if(this.username == ""){
               this.showAlert = !this.showAlert;
@@ -141,6 +145,12 @@
 </script>
 
 <style scoped>
+  a:active{
+    text-decoration: none;
+  }
+  a:visited{
+    text-decoration: none;
+  }
   .reset{
     width:100%;
     height: 100%;

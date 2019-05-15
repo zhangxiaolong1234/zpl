@@ -156,6 +156,12 @@
 </script>
 
 <style scoped>
+  a:active{
+    text-decoration: none;
+  }
+  a:visited{
+    text-decoration: none;
+  }
 .register{
   width:100%;
   height: 100%;
