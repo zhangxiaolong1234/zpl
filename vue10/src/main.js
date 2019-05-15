@@ -19,7 +19,10 @@ const store = new Vuex.Store({
     youhui:[],//有几张优惠券
     user_name: '',
     addlist:[],
-    AddArr:{}
+    AddArr:{},
+    firstadd:'',
+    username:'',
+    phoneNum:''
   },
   mutations: {
     SetMsg(state, user_name) {

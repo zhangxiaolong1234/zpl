@@ -23,6 +23,7 @@ import ChangeName from '../components/ChangeName';
 import ChangeAdd from '../components/ChangeAdd';
 import AppendAdd from '../components/AppendAdd';
 import SearchAdd from '../components/SearchAdd';
+import SearchMaster from '../components/SearchMaster';
 export default new Router({
   routes: [
     // {path:'/',redirect:'/home'},
@@ -57,5 +58,6 @@ export default new Router({
     {path:'/hbHistory',component:HbHistory},
     {path:'/download',component:Download},
     {path:'/integralcard',component:Integralcard},
+    {path:'/searchMaster',component:SearchMaster},
   ]
 })

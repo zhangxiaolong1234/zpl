@@ -2,7 +2,7 @@
   <div class="UserInfor">
     <router-view/>
     <div id="head_top">
-      <routerLink :to="{path:'/wode'}" class="more"> < </routerLink>
+      <routerLink :to="{path:'/wode'}" class="more" @click="changeuser"> < </routerLink>
       <span class="title">账户信息</span>
     </div>
     <div class="photo">
@@ -23,9 +23,9 @@
 
     <div class="username">
       <router-link :to="{path:'/wode/info/changeName'}">
-        <div class="left"><span>用户名</span></div>
-        <div class="right">
-          <span class="name">{{msg}}</span>
+        <div class="left left2"><span>用户名</span></div>
+        <div class="right right2">
+          <span class="name">{{this.$store.state.username}}</span>
           <span class="icon"> > </span>
         </div>
         <div class="clear"></div>
@@ -34,9 +34,9 @@
     </div>
     <div class="add">
       <router-link :to="{path:'/wode/info/changeAdd'}">
-        <div class="left"><span>收货地址</span></div>
-        <div class="right" v-for="pro in this.$store.state.addlist">
-          <span class="name">{{pro.address_detail}}</span>
+        <div class="left left2"><span>收货地址</span></div>
+        <div class="right right2">
+          <span class="name">{{this.$store.state.firstadd}}</span>
           <span class="icon"> > </span>
         </div>
         <div class="clear"></div>
@@ -81,7 +81,6 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
   import ChangeName from "./ChangeName";
   import ChangeAdd from "./ChangeAdd";
   export default {
@@ -99,10 +98,10 @@
       }
 
     },
-    computed:mapGetters({
-      msg:'GetMsg',
-    }),
     methods:{
+      changeuser(){
+        this.$store.state.username=this.$store.state.username;
+      },
       changePhone(){
         this.showAlert = true;
         this.alertText = '请在手机APP中设置';
@@ -117,6 +116,7 @@
       back(){
         this.Alert2 = false;
         this.$router.push("/wode");
+        this.$store.state.username='';
       }
     }
 
@@ -180,6 +180,9 @@
     height:3.1rem;
     line-height: 3.1rem;
   }
+  .left2{
+    width: 20%;
+  }
   .clear{ clear:both}
 
   .right{
@@ -188,6 +191,9 @@
     margin-right:.5rem;
     display:block;
     float:right;
+  }
+  .right2{
+    width: 70%;
   }
   .file{
     width:100%;

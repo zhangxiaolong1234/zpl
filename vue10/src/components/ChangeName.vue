@@ -3,7 +3,7 @@
       <div id="head_top">
         <routerLink :to="{path:'/wode/info'}" class="more"> < </routerLink>
         <span class="title">修改用户名</span>
-        <p ><input type="text" id="input" placeholder="请输入用户名" :value='msg' @change='inputMsg'></p>
+        <p ><input type="text" id="input" placeholder="请输入用户名" v-model='msg' @change='inputMsg'></p>
         <p class="txt" v-if="earn">用户名只能修改一次（5-24字符之间）</p>
         <p class="txt2" v-else>用户名长度在5到24位之间</p>
         <button class="btn btn-primary"  @click="inputMsg">确认修改</button>
@@ -12,17 +12,14 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex';
   export default {
         name: "ChangeName",
       data(){
       return{
-        earn:true
+        earn:true,
+        msg:''
         }
       },
-    computed:mapState({
-      msg:state => state.msg //输入框的内容
-    }),
       methods:{
         inputThing(){
           if(this.inputMsg.length <5 || this.inputMsg.length>24){
@@ -34,8 +31,8 @@
           }
 
         },
-        inputMsg(e){
-          this.$store.commit('SetMsg',e.target.value)
+        inputMsg(){
+          this.$store.state.username=this.msg;
           this.$router.push("/wode/info")
         }
 

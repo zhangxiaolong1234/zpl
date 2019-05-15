@@ -6,7 +6,7 @@
         <span class="title">编辑地址</span>
         <span class="emd" @click="changeBtn" v-text="text1">{{text1}}</span>
       </div>
-          <div class="addp"  v-show="showa" v-for="pro in this.$store.state.addlist">
+          <div class="addp"  v-show="showa" v-for="(pro,index) in this.$store.state.addlist">
             <div class="left">
               <p><span>{{pro.address_detail}}</span></p>
               <p><span>{{pro.phone}}</span></p>
@@ -54,11 +54,11 @@
           }
          },
         changeShow(){
-          console.log('del');
+          //console.log('del');
           this.showa= false;
         },
         addBtn(){
-          console.log(this.$store.state.addlist);
+          //console.log(this.$store.state.addlist);
           this.$router.push('/wode/info/changeAdd');
         }
       }

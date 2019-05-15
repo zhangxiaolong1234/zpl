@@ -54,8 +54,10 @@
 
           if(this.AddArr.name!=''&&this.AddArr.phone!=''){
             this.AddArrs.push(this.AddArr);
-            this.$router.push("/wode/info/changeAdd")
+            //this.$router.push("/wode/info/changeAdd")
             this.$store.state.addlist =this.AddArrs;
+            this.$store.state.phoneNum=this.phoneNum;
+            this.$store.state.firstadd=this.$store.state.addlist[0].address_detail
             console.log(this.AddArrs);
           }
         }

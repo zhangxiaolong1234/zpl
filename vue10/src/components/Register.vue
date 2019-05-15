@@ -5,7 +5,7 @@
       <!--第一导航栏部分-->
          <div class="zplson1">
            <!--<span class="zpl0"><</span>-->
-           <router-link :to="{}"><</router-link>
+           <router-link :to="{path:'/wode'}"><</router-link>
            <span class="zpl1">密码登录</span>
          </div>
 

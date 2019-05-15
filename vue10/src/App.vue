@@ -29,7 +29,7 @@
     components: {Register, Integral, Info, Benefit, Balancecard, Balance, Reset, Wode},
     mounted(){
       Vue.axios.get('https://elm.cangdu.org/promotion/v2/users/1/hongbaos?limit=20&offset=0').then((res)=>{
-        console.log(res.data);
+        //console.log(res.data);
         // this.hongbao = res.data;
         this.$store.state.youhui= res.data;
       });

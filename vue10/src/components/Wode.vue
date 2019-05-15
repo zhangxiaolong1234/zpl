@@ -15,9 +15,9 @@
           <div class="p4">
             <span><router-link :to="{path:'/register'}">{{flag}}</router-link></span>
             <!--<div v-else></div>-->
-            <p class="el-icon-mobile-phone" >暂无绑定手机号</p>
+            <p class="el-icon-mobile-phone phoneN" >暂无绑定手机号</p>
           </div>
-        <div class="p5"><router-link :to="{path:'/wode/info'}">></router-link></div>
+        <div class="p5" @click="sendUser"><router-link :to="{path:'/wode/info'}">></router-link></div>
 
       </div>
 
@@ -103,7 +103,7 @@
       },
       mounted(){
           Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
-            console.log(res.data.username);
+            //console.log(res.data.username);
             this.name = res.data.username;
             if(this.name = ''){
                 this.flag = '注册/登录'
@@ -114,6 +114,11 @@
           }).catch((err)=>{
             console.log('请求错误',err);
           })
+      },
+      methods:{
+        sendUser(){
+          this.$store.state.username =this.flag;
+        }
       },
       components: {Benefit, Info},
     }
@@ -190,6 +195,9 @@
     color: white;
     font-size: 1rem;
   }
+  .p4 p.phoneN{
+    color: white;
+  }
   .p5{
     padding-right: .3rem;
   }
@@ -229,19 +237,22 @@
   .p6 div{
     width: 100%;
     border-bottom: 2px solid #f5f5f5;
-    font-size: 0.8rem;
-    color: #000;
+    font-size: 0.7rem;
+    padding: .5rem 0 .5rem .5rem;
   }
+.p6 div a{
+  color: #333;
+}
   .p7{
     background: white;
     margin-top: 0.7rem;
   }
 .p7 div{
   width: 100%;
+  padding: .5rem 0 .5rem .5rem;
   border-bottom: 2px solid #f5f5f5;
-  margin-top: 1rem;
-  font-size: 0.8rem;
-  color: #000;
+  font-size: 0.7rem;
+  color: #333;
 }
   .p6 span{
       position: absolute;
@@ -253,9 +264,10 @@
   right: 0.25rem;
   color: grey;
 }
-  a{
-    text-decoration: none;
-  }
+.p7 div a{
+  color: #333;
+  text-decoration: none;
+}
 /* banner */
 .banner{
   width: 100%;
