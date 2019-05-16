@@ -5,14 +5,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
-Vue.use(VueAxios, axios);
-Vue.config.productionTip = false
-Vue.use(iView)
-
 import Vuex from 'vuex'
-
-Vue.use(Vuex)
-axios.defaults.withCredentials = true
+Vue.use(VueAxios, axios);
+Vue.config.productionTip = false;
+Vue.use(iView);
+Vue.use(Vuex);
+axios.defaults.withCredentials = true;
 
 const store = new Vuex.Store({
   state:{
@@ -23,21 +21,6 @@ const store = new Vuex.Store({
     firstadd:'',
     username:'',
     phoneNum:''
-  },
-  mutations: {
-    SetMsg(state, user_name) {
-      state.user_name = user_name
-    }
-  },
-  getters: {
-    GetMsg:(state)=>{
-      return state.user_name
-    }
-  },
-  actions: {
-    SetMsg(state, user_name) {
-      store.commit("SetMsg", user_name)
-    }
   }
 })
 new Vue({

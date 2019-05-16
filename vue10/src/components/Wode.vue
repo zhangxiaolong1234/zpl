@@ -52,32 +52,42 @@
         </div>
       </div>
      <div class="p6">
+       <router-link :to="{path:''}">
        <div  class="el-icon-s-unfold">
-         <router-link :to="{path:''}">我的订单</router-link>
+         我的订单
          <span>></span>
        </div>
+       </router-link>
        <br>
+       <router-link :to="{path:''}">
        <div  class="el-icon-s-goods">
-         <router-link :to="{path:''}">积分商城</router-link>
+           积分商城
          <span>></span>
        </div>
+       </router-link>
        <br>
+       <router-link :to="{path:''}">
        <div  class="el-icon-potato-strips">
-         <router-link :to="{path:''}">饿了么会员卡</router-link>
+         饿了么会员卡
          <span>></span>
        </div>
+       </router-link>
      </div>
       <!--服务中心-->
       <div class="p7">
+        <router-link :to="{path:'/service'}">
         <div  class="el-icon-s-goods">
-          <router-link :to="{path:'/service'}">服务中心</router-link>
+          服务中心
           <span>></span>
         </div>
+        </router-link>
         <br>
-        <div  class="el-icon-s-goods">
-          <router-link :to="{path:'/download'}">下载饿了吗App</router-link>
+        <router-link :to="{path:'/download'}">
+        <div  class="el-icon-potato-strips">
+          下载饿了吗App
           <span>></span>
         </div>
+        </router-link>
       </div>
     </div>
     </div>

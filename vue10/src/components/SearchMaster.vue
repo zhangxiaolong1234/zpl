@@ -5,7 +5,7 @@
         <span class="title">搜索</span>
       </div>
       <div class="search">
-        <input type="text"  @input="write" v-model="value">
+        <input type="text"  @input="write" v-model="value" @click="clickinput">
         <span class="close" v-show="shower" @click="closevalue">x</span>
         <button @click="SearchInfor">提交</button>
       </div>
@@ -13,12 +13,12 @@
       <h3 v-show="h3">搜索历史</h3>
       <div class="history" v-show="shower2">
           <div class="list" v-for="(li,index) in historyList">
-          <p class="li" >
-            <span class="li1">{{li}}</span>
-            <span class="li2"  @click="closeliHistory()">x</span>
-          </p>
+              <p class="li" >
+                <span class="li1">{{li}}</span>
+                <span class="li2"  @click="closeliHistory(li,index)">x</span>
+              </p>
         </div>
-        <p class="lihis" @click="closeHistory">清空搜索历史</p>
+        <p class="lihis" @click="closeHistory" v-show="clearHistory">清空搜索历史</p>
       </div>
 
       <!--无搜索结果-->
@@ -47,7 +47,6 @@
             clearHistory:false,
             shower:false,
             shower2:false,
-            lishow:true,
             noneResult:false,
             shop:false,
             MasterInfor:'',
@@ -59,6 +58,9 @@
           }
       },
       methods:{
+        clickinput(){
+          this.value='';
+        },
         write(){
           if(this.value!=''&&this.value!='请输入商家或美食名称'){
             this.shower=true;
@@ -73,8 +75,14 @@
           this.h3=true;
           this.shop=false;
           this.shower2=true;
+          this.clearHistory=true;
         },
-        closeliHistory(){
+        closeliHistory(li,index){
+          this.historyList.splice(index,1);
+          if(this.historyList.length==0){
+            this.clearHistory=false,
+              this.h3=false;
+          }
         },
         closeHistory(){
           this.shower2=false;
@@ -89,7 +97,7 @@
           Vue.axios.get('https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword='+this.value).then((res) => {
             console.log(res.data);
             this.MasterInfor=res.data;
-            if(this.MasterInfor.message=='关键词参数错误'){
+            if(this.MasterInfor.message=='关键词参数错误'||'搜索餐馆数据失败'){
               this.noneResult=true;
             }else{
               this.shop=true;

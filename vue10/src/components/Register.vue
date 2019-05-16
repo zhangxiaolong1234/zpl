@@ -5,7 +5,7 @@
       <!--第一导航栏部分-->
          <div class="zplson1">
            <!--<span class="zpl0"><</span>-->
-           <router-link :to="{path:'/wode'}"><</router-link>
+           <a @click="backUp"> < </a>
            <span class="zpl1">密码登录</span>
          </div>
 
@@ -85,6 +85,9 @@
           }
       },
       methods:{
+        backUp(){
+          this.$router.go(-1);
+        },
           login(){
             if(this.username == ''&& this.passWord == '' && this.yanZhengMa == '' ){
               this.showAlert = true;

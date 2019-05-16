@@ -19,8 +19,8 @@
             <div class="l5">提现</div>
         </div>
       </div>
+      <div class="title">交易明细</div>
       <div class="zplson2">
-          <div>交易明细</div>
         <div class="el-icon-user-solid"></div>
           <div>暂无明细记录</div>
       </div>
@@ -49,7 +49,7 @@
   .balance{
     width: 100%;
     height: 100%;
-    background: gainsboro;
+    background:#f5f5f5;
   }
   .zplson1{
     width: 100%;
@@ -74,6 +74,12 @@
     color: white;
     font-size: 1.3rem;
     float:left;
+  }
+  .title{
+    font-size: .6rem;
+    color: #999;
+    line-height: 2rem;
+    padding-left: .5rem;
   }
   .l1{
     width: 100%;
