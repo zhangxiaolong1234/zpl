@@ -3,23 +3,24 @@
       <!--余额显示-->
       <div class="zplson1">
         <!-- < 按钮部分-->
-        <div id="head_top">
-          <router-link :to="{path:'/wode',}"><span class="more"> < </span> </router-link>
-          <span class="title">我的余额</span>
-        </div>
+          <div class="l1">
+            <router-link :to="{path:'/wode'}"><</router-link>
+            <span class="zpl1">我的余额</span>
+          </div>
         <div class="l2">
             <div class="l3">
               <p>当前余额</p>
               <router-link :to="{path:'/balance/balancecard',}" class="el-icon-question"
 >余额说明</router-link>
+             <!--<Balancecard></Balancecard>-->
               <router-view></router-view>
             </div>
             <div class="l4"><span>0.00</span> <span>元</span></div>
             <div class="l5">提现</div>
         </div>
       </div>
-      <div class="title1">交易明细</div>
       <div class="zplson2">
+          <div>交易明细</div>
         <div class="el-icon-user-solid"></div>
           <div>暂无明细记录</div>
       </div>
@@ -28,13 +29,19 @@
 
 <script>
   import Vue from 'vue'
+  import Balancecard from './Balancecard'
   //小图标
   import ElementUI from 'element-ui';
   import 'element-ui/lib/theme-chalk/index.css';
 
   Vue.use(ElementUI);
     export default {
-        name: "Balance"
+        name: "Balance",
+      data(){
+          return{
+
+          }
+      },
     }
 </script>
 
@@ -42,7 +49,7 @@
   .balance{
     width: 100%;
     height: 100%;
-    background:#f5f5f5;
+    background: gainsboro;
   }
   .zplson1{
     width: 100%;
@@ -68,11 +75,11 @@
     font-size: 1.3rem;
     float:left;
   }
-  .title1{
-    font-size: .6rem;
-    color: #999;
-    line-height: 2rem;
-    padding-left: .5rem;
+  .l1{
+    width: 100%;
+    /*height: 25%;*/
+    /*background:  pink;*/
+    border-bottom: 1px solid white;
   }
   .l1 span{
     color: white;
@@ -122,27 +129,17 @@
     line-height:2rem;
     border-radius: 4%;
   }
-  #head_top{
-    width: 100%;
-    height: 1.95rem;
-    background-color: #3190e8;
-  }
-  .more{
-    width: 10%;
-    color: #fff;
-    height: 1.95rem;
-    margin-left:.1rem;
-    display:block;
-    position: absolute;
-  }
-  .title{
-    width: 100%;
-    text-align: center;
-    height: 1.95rem;
-    line-height:1.95rem ;
-    font-size: .8rem;
-    color: #fff;
-    font-weight: 700;
-    display: inline-block;
-  }
+  /*.zpl1{*/
+    /*width: 50%;*/
+    /*height: 100%;*/
+    /*font-size: 1rem;*/
+    /*color: white;*/
+    /*float:left;*/
+    /*margin-left: 40px;*/
+  /*}*/
+  /*.l2{*/
+    /*width: 100%;*/
+    /*height: 90%;*/
+    /*background: red;*/
+  /*}*/
 </style>

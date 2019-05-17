@@ -6,15 +6,14 @@
         <span class="title">编辑地址</span>
         <span class="emd" @click="changeBtn" v-text="text1">{{text1}}</span>
       </div>
-          <div class="addp"  v-show="showa" v-for="(li,index) in this.AddArrs" :key="index">
+          <div class="addp"  v-show="showa" v-for="(pro,index) in this.$store.state.addlist">
             <div class="left">
-              <p><span>{{li.name}}</span></p>
-              <p><span>{{li.phone}}</span></p>
+              <p><span>{{pro.address_detail}}</span></p>
+              <p><span>{{pro.phone}}</span></p>
             </div>
             <div class="right">
-              <span class="del" @click="changeShow(li,index)" v-show="dele">x</span>
+              <span class="del" @click="changeShow">x</span>
             </div>
-            <div class="clear"></div>
           </div>
           <div class="addname">
             <router-link :to="{path:'/wode/info/changeAdd/appendAdd/:adressLi'}">
@@ -29,7 +28,7 @@
 </template>
 
 <script>
-  import  Vue from  'vue';
+  import {mapGetters} from 'vuex';
     import AppendAdd from "./AppendAdd";
     export default {
         name: "ChangeAdd",
@@ -38,46 +37,28 @@
           return{
             text1:'编辑',
             showa:true,
-            dele:false,
-            userID:'',
-            AddArrs:[],
-            XArr:''
           }
 
         },
-      beforeRouteUpdate(to, from, next) {
-        this.changeAdd();
-        next()
-      },
-      mounted(){
-        this.changeAdd();
+      computed:{
       },
       methods:{
-          changeAdd(){
-            Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
-              this.userID=res.data.user_id;
-              Vue.axios.get('https://elm.cangdu.org/v1/users/'+this.userID+'/addresses').then((res)=>{
-                this.AddArrs=res.data;
-              });
-            });
-          },
         changeBtn(){
           if(this.text1=='编辑'){
+            console.log('编辑');
             this.text1='完成';
-            this.dele=true;
+            this.showa=true;
           }else if(this.text1=='完成') {
             this.text1 = '编辑';
-            this.dele=false;
+            this.showa=false;
           }
          },
-        changeShow(li,index){
-            console.log(li.id,index);
-          Vue.axios.delete('https://elm.cangdu.org/v1/users/'+this.userID+'/addresses/'+li.id).then((res)=>{
-            console.log(res.data);
-          });
-          this.showa=false;
+        changeShow(){
+          //console.log('del');
+          this.showa= false;
         },
         addBtn(){
+          //console.log(this.$store.state.addlist);
           this.$router.push('/wode/info/changeAdd');
         }
       }
@@ -129,6 +110,7 @@
   }
   .addp{
     width: 100%;
+    height: 2.5rem;
     margin-top: .3rem;
     padding:.3rem 0 .3rem .4rem;
     background-color: #fff8c3;
@@ -153,14 +135,14 @@
   }
   .left{
     display:block;
-    width: 90%;
+    width: 60%;
     float: left;
   }
   .clear{ clear:both}
 
   .right{
     text-align: right;
-    width: 5%;
+    width: 30%;
     margin-right:.5rem;
     display:block;
     float:right;

@@ -3,9 +3,9 @@
     <!--余额显示-->
     <div class="zplson1">
       <!-- < 按钮部分-->
-      <div id="head_top">
-        <router-link :to="{path:'/wode'}"><span class="more"> < </span></router-link>
-        <span class="title1">我的积分</span>
+      <div class="l1">
+        <router-link :to="{path:'/wode'}"><</router-link>
+        <span class="zpl1">我的积分</span>
       </div>
       <div class="l2">
         <div class="l3">
@@ -14,20 +14,13 @@
           <router-view></router-view>
         </div>
         <div class="l4"><span>0</span> <span>分</span></div>
-        <div class="l5" @click="score">积分兑换商品</div>
+        <div class="l5">积分兑换商品</div>
       </div>
     </div>
-    <p class="title">最近30天积分记录</p>
     <div class="zplson2">
+      <div>最近30天积分记录</div>
       <div class="el-icon-user-solid"></div>
-      <div class="title2">最近30天无积分记录</div>
-    </div>
-
-    <!--提示框-->
-    <div class="fail" v-show="showAlert">
-      <img src="../images/images/警告.png" alt="">
-      <p>快去下单赚取大量积分</p>
-      <button class="btn btn-success btn2" @click="sure">确定</button>
+      <div>最近30天无积分记录</div>
     </div>
   </div>
 </template>
@@ -44,17 +37,8 @@
       data(){
           return{
             read:null,
-            showAlert: false,
           }
       },
-      methods:{
-          score(){
-            this.showAlert = true;
-          },
-        sure(){
-          this.showAlert = false;
-        }
-      }
     }
 </script>
 
@@ -62,30 +46,7 @@
   .balance{
     width: 100%;
     height: 100%;
-    background: #f5f5f5;
-  }
-  #head_top{
-    width: 100%;
-    height: 1.95rem;
-    background-color: #3190e8;
-  }
-  .more{
-    width: 10%;
-    color: #fff;
-    font-size: 1rem;
-    height: 1.95rem;
-    line-height: 1.95rem;
-    padding-left:.3rem;
-  }
-  .title1{
-    width: 77%;
-    text-align: center;
-    height: 1.95rem;
-    line-height:1.95rem ;
-    font-size: .8rem;
-    color: #fff;
-    font-weight: 700;
-    display: inline-block;
+    background: gainsboro;
   }
   .zplson1{
     width: 100%;
@@ -97,24 +58,15 @@
   }
   .zplson2{
     width: 100%;
+    /*height: 60%;*/
     background:#f5f5f5;
     font-size: 1rem;
     text-align: center;
     line-height: 3rem;
   }
-  .title{
-    font-size: .6rem;
-    color: #999;
-    line-height: 2rem;
-    padding-left: .5rem;
-  }
-  .title2{
-    margin-top: .5rem;
-    font-size: .7rem;
-    color: #666;
-  }
   .l1 a{
     width: 10%;
+    /*height: 100%;*/
     display: block;
     color: white;
     font-size: 1.3rem;
@@ -122,6 +74,8 @@
   }
   .l1{
     width: 100%;
+    /*height: 25%;*/
+    /*background:  pink;*/
     border-bottom: 1px solid white;
   }
   .l1 span{
@@ -171,34 +125,5 @@
     margin-top: 0.5rem;
     line-height:2rem;
     border-radius: 4%;
-  }
-  .fail{
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -6rem;
-    margin-left: -6rem;
-    width: 12rem;
-    animation: tipMove .4s;
-    background-color: #fff;
-    padding-top: .6rem;
-    border: 1px;
-    border-radius: .25rem;
-    border:1px solid #eee;
-  }
-  .fail img{
-    margin-bottom: .5rem;
-  }
-  .btn2{
-    font-size: .8rem;
-    color: #fff;
-    font-weight: 700;
-    margin-top: .8rem;
-    width: 100%;
-    height: 1.8rem;
-    line-height: .8rem;
-    border-top-left-radius: 0;
-    border-top-right-radius:0;
   }
 </style>

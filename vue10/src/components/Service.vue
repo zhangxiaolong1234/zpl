@@ -1,7 +1,7 @@
 <template>
   <div class="service">
     <div id="head_top">
-      <a @click="backUp"> <span class="more"> < </span> </a>
+      <router-link :to="{path:'/wode'}"><span class="more"> < </span></router-link>
       <span class="title">服务中心</span>
     </div>
     <div class="content">
@@ -64,9 +64,6 @@
 
     },
     methods: {
-      backUp(){
-        this.$router.go(-1);
-      },
       toQuestionDetail(item, index){
         this.$router.push({name:'sd',path:'/service/serviceDetail',params:{tit:JSON.stringify(this.questionTitle[index]),det:JSON.stringify(this.questionDetail[index])}});
         // for(var titlea in this.questionTitle){

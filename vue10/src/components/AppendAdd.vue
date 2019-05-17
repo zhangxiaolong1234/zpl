@@ -22,54 +22,45 @@
 </template>
 
 <script>
-  import  Vue from  'vue';
+  import {mapState} from 'vuex';
     import SearchAdd from "./SearchAdd";
     export default {
         name: "AppendAdd",
         components: {SearchAdd},
       data(){
           return{
-            userID:'',
             nameadd:'',
-            //adressLi:this.$route.params.pro,
+            adressLi:'',
             addetail:'',
             phoneNum:'',
             phoneNum2:'',
+            AddArr:{},
+            AddArrs:[],
           }
       },
-      mounted(){
-          Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
-            this.userID=res.data.user_id;
-          })
-      },
+      computed:mapState({
+        AddArrs1:state => state.AddArrs //输入框的内容
+      }),
       methods:{
         inputMsg1(){
-          if(this.nameadd!=''&&this.address!=''&&this.phoneNum.length==11){
-            //console.log('123',this.$route.params.pro);
-            //    发送axios请求
-            Vue.axios.post('https://elm.cangdu.org/v1/users/'+this.userID+'/addresses',{
-              //把自定义的变量赋值给数据库的参数
-              'name':this.nameadd,
-              'address':this.$route.params.pro,
-              'address_detail':this.addetail,
-              'phone':this.phoneNum,
-              'phone_bk':this.phoneNum2,
-              'geohash':'wtw2dfyxb62',
-              'tag':'2',
-              'sex':1,
-              'tag_type':2,
-            }).then((res)=>{
-              console.log(res.data);
-              if(res.data){
-                this.$router.push("/wode/info/changeAdd");
-              }
-            }).catch((err)=>{
-              console.log('请求错误',err);
-            });
-          }
+          console.log('123');
+          this.AddArr={
+            name: this.nameadd,
+            address:this.$route.params.pro,
+            address_detail:this.addetail,
+            phone:this.phoneNum,
+            phone_bk: this.phoneNum2,
+          };
 
-
+          if(this.AddArr.name!=''&&this.AddArr.phone!=''){
+            this.AddArrs.push(this.AddArr);
+            //this.$router.push("/wode/info/changeAdd")
+            this.$store.state.addlist =this.AddArrs;
+            this.$store.state.phoneNum=this.phoneNum;
+            this.$store.state.firstadd=this.$store.state.addlist[0].address_detail
+            console.log(this.AddArrs);
           }
+        }
       },
 
     }

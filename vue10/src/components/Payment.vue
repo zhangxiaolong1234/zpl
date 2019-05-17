@@ -1,260 +1,173 @@
 <template>
-  <div class="payment">
-    <!--第一导航栏部分-->
-    <div id="head_top">
-      <router-link :to="{path:'/vipcard'}"><span class="more"> < </span></router-link>
-      <span class="title">在线支付</span>
-    </div>
-    <p class="zpl3">支付剩余时间</p>
-    <div class="zpl2">
-      <span>00 : {{minutes}} : {{seconds}}</span>
-    </div>
-    <p class="zpl4">选择支付方式</p>
-    <!--支付宝-->
-    <div class="zpl5">
-      <div class="zpl6"><img src="../images/images/zhifubao.png" alt="">
-        <span>支付宝</span>
+    <div>
+      <Head head-title="在线支付" go-back="true"></Head>
+      <!--倒计时容器-->
+      <div class="show_time_amount">
+        <section>
+          <header class="time_last">支付剩余时间</header>
+          <p class="time">{{remaining}}</p>
+        </section>
       </div>
-      <div class="zpl7" @click="aaa">
-        <img src="../images/images/未选中.png" alt="" v-if="guang">
-        <img src="../images/images/选中.png" alt="" v-else>
-      </div>
+      <div class="pay_way">选择支付方式</div>
+      <!--支付方式-->
+      <section class="pay_way_list">
+        <section class="pay_item">
+          <div class="pay_icon_container">
+            <div class="zhifubao"></div>
+            <span>支付宝</span>
+          </div>
+          <div class="choose_img" @click="payWay = 1" :class="{choosed_way: payWay == 1}"></div>
+        </section>
+        <section class="pay_item">
+          <div class="pay_icon_container">
+            <div class="vx"></div>
+            <span>微信</span>
+          </div>
+          <div class="choose_img" @click="payWay = 2" :class="{choosed_way: payWay == 2}"></div>
+        </section>
+      </section>
+      <!--确认支付-->
+      <p class="confirm_pay" @click="confirmPay">确认支付</p>
+      <AlertTip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></AlertTip>
     </div>
-    <!--微信-->
-    <div class="zpl5">
-      <div class="zpl6">
-        <img src="../images/images/weixin.png" alt="">
-        <span>微信</span>
-      </div>
-      <div class="zpl7" @click="bbb">
-        <img src="../images/images/未选中.png" alt="" v-if="liang">
-        <img src="../images/images/选中.png" alt="" v-else>
-      </div>
-    </div>
-    <div class="zpl8" @click="ddd">
-      确认支付
-    </div>
-    <!--弹框-->
-    <div class="zpl9" v-if=" showAlert">
-      <img src="../images/images/警告.png" alt="">
-      <div v-text="alertText"></div>
-      <button style="width: 12rem;background: #4cd964;font-size: 0.9rem" @click="ccc">确认</button>
-    </div>
-  </div>
 </template>
 
 <script>
-  export default {
-    name: "Payment",
-    //状态
-    data() {
-      return {
-        minutes: 15,//分
-        seconds: 0,//秒
-        guang:true,//显示未选中
-        liang:false,//显示选中
-        showAlert:true,//控制弹框显隐
-        alertText:null,//弹框中的文字
-      }
-    },
-    //方法
-    methods: {
-      num(n) {
-        return n < 10 ? '0' + n : '' + n
-      },
-      timer() {
-        var _this = this
-        var time = window.setInterval(function () {
-          if (_this.seconds === 0 && _this.minutes !== 0) {
-            _this.seconds = 59
-            _this.minutes -= 1
-          } else if (_this.minutes === 0 && _this.seconds === 0) {
-            _this.seconds = 0
-            window.clearInterval(time)
-          } else {
-            _this.seconds -= 1
+    import Head from "../Header/Head";
+    import AlertTip from "../common/AlertTip";
+    export default {
+        name: "Payment",
+       components: {AlertTip, Head},
+        data() {
+          return {
+            //倒计时
+            countNum:900,
+            //支付方式
+            payWay:1,
+            showAlert:false,
+            alertText:''
           }
-        }, 1000)
-      },
-      //点支付宝选中支付宝
-      aaa(){
-        this.guang = false;
-        this.liang = true;
-        console.log("111");
-      },
-      //点微信选中微信
-      bbb(){
-        this.liang=false;
-        this.guang = true;
-        console.log("222");
-      },
-      //点击隐藏弹框
-      ccc(){
-        this.showAlert=false;//控制弹框显隐
-      },
-      //点击确认支付
-      ddd(){
-        this.showAlert=true;//控制弹框显示
-        this.alertText='当前环境无法支付,请打开官方App进行付款';
-      },
-    },
-    //挂载
-    mounted() {
-      this.timer();
-      this.alertText='暂不开放支付功能';
-    },
-    watch: {
-      second: {
-        handler(newVal) {
-          this.num(newVal)
-
+        },
+        mounted(){
+          this.remainingTime();
+        },
+        beforeDestroy(){
+          clearInterval(this.timer);
+        },
+        computed :{
+          //时间倒计时
+          remaining() {
+            let minute = parseInt(this.countNum/60);
+            if (minute < 10) {
+              minute = '0' + minute;
+            }
+            let second = parseInt(this.countNum%60);
+            if (second < 10) {
+              second = '0' + second;
+            }
+            return '00 : ' + minute + ' : ' + second;
+          }
+        },
+        methods: {
+          //倒计时
+          remainingTime(){
+            clearInterval(this.timer);
+            this.timer = setInterval(() => {
+              this.countNum --;
+              if (this.countNum == 0) {
+                clearInterval(this.timer);
+                this.showAlert = true;
+                this.alertText = '支付超时';
+              }
+            }, 1000);
+          },
+          //确认支付
+          confirmPay() {
+            this.showAlert = true;
+            this.alertText = '当前环境无法支付，请打开官方APP进行付款';
+            this.$router.push('/order')
+          }
         }
-      },
-      minute: {
-        handler(newVal) {
-          this.num(newVal)
-        }
-      }
     }
-  }
 </script>
 
 <style scoped>
-  *{
-    padding: 0;
-    margin: 0;
-  }
-  .payment{
-    width: 100%;
-    height: 100%;
-    background: #f1f1f1;
-    overflow-y: hidden;
-  }
-  #head_top{
-    width: 100%;
-    height: 1.95rem;
-    background-color: #3190e8;
-  }
-  .more{
-    width: 10%;
-    color: #fff;
-    height: 1.95rem;
-    margin-left:.1rem;
-    display:block;
-    position: absolute;
-  }
-  .title{
-    width: 100%;
+  .show_time_amount {
+    margin-top: 1.95rem;
+    background-color: #fff;
+    padding: .7rem;
     text-align: center;
-    height: 1.95rem;
-    line-height:1.95rem ;
-    font-size: .8rem;
-    color: #fff;
-    font-weight: 700;
-    display: inline-block;
   }
-  .zplson1 a{
-    width: 10%;
-    display: block;
-    color: white;
-    font-size: 1rem;
-    float:left;
-    background: #3190e8;
+  .time_last {
+    font-size: .6rem;
+    color: #666;
+    margin-top: 1rem;
   }
-  .zpl1{
-    width: 90%;
-    font-size: 1rem;
-    color: white;
-    float:left;
-    background: #3190e8;
-    text-align: center;
-    line-height: 1.5rem;
-  }
-  .zpl2{
-    width: 100%;
-    height: 4rem;
-    background: white;
-    text-align: center;
+  .time {
     font-size: 1.5rem;
+    color: #333;
+    margin: .3rem 0 1rem;
   }
-  .zpl3{
-    width: 100%;
-    background: white;
-    text-align: center;
-    font-size: 0.8rem;
-    padding-top: 1rem;
+  /*支付方式*/
+  .pay_way {
+    background-color: #f1f1f1;
+    padding: 0 .7rem;
+    font-size: .7rem;
+    color: #666;
+    line-height: 1.8rem;
   }
-  .zpl4{
-    width: 100%;
-    font-size: 0.8rem;
-    padding: 0.5rem;
+  .pay_way_list {
+    background-color: #fff;
   }
-  .zpl5{
-    width: 100%;
-    padding:0.6rem 1rem;
-    overflow: hidden;
-    border-top: 0.01rem solid gainsboro;
-    background: white;
+  .pay_item {
+    padding: .4rem .7rem;
+    line-height: 2.6rem;
+    border-bottom: .025rem solid #f5f5f5;
   }
-  .zpl6 img{
-    width: 17%;
+  .pay_way_list .pay_item,.pay_icon_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .zpl7 img{
-    width: 100%;
+  .pay_icon_container span {
+    font-size: .7rem;
+    color: #666;
   }
-  .zpl6{
-    width: 90%;
-    float: left;
+  .zhifubao {
+    width: 2rem;
+    height: 2rem;
+    background: url("../img/zhifubao.png") no-repeat;
+    background-size: cover;
+    margin-right: .2rem;
   }
-  .zpl6 span{
-    font-size: 0.8rem;
+  .choose_img {
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/duihao.png") no-repeat;
+    background-size: cover;
   }
-  .zpl7{
-    width: 10%;
-    float: right;
+  .choosed_way {
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/duihao2.png") no-repeat;
+    background-size: cover;
   }
-  .zpl8{
-    width: 90%;
-    background: #4cd964;
-    text-align: center;
-    line-height: 1.7rem;
-    font-size: 0.8rem;
-    margin: 0.5rem;
-    color: white;
-    border-radius: 5%;
+  .vx {
+    width: 2rem;
+    height: 2rem;
+    background: url("../img/vx.png") no-repeat;
+    background-size: cover;
+    margin-right: .2rem;
   }
-  .zpl9{
-    width: 12rem;
-    height: 9rem;
-    background: white;
-    position: absolute;
-    left: 2rem;
-    bottom: 12rem;
-    text-align: center;
-    font-size: 0.7rem;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
-    padding-top: 1rem;
-  }
-  .zpl9 button{
-    font-size: .8rem;
-    color: #fff;
-    font-weight: 700;
-    margin-top: .8rem;
+  /*确认支付*/
+  .confirm_pay {
     background-color: #4cd964;
-    width: 100%;
+    font-size: .7rem;
+    color: #fff;
     text-align: center;
     line-height: 1.8rem;
-    border-bottom-left-radius: .25rem;
-    border-bottom-right-radius: .25rem;
-    border: 0;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  .zpl9 img{
-    width: 35%;
-    height: 4rem;
+    border-radius: .2rem;
+    margin: .5rem .7rem 0;
+    font-weight: 700;
   }
 </style>
-
