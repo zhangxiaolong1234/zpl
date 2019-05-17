@@ -116,12 +116,12 @@
               this.showAlert = true;
               this.alertText = '验证码不正确';
             }else {
-              console.log(res.data);
+              this.$store.commit("recordUserInfo",res.data);
+              this.$router.go(-1);
               this.$router.go(-1);
               this.showAlert = true;
               this.alertText = res.data.message;
             }
-            //this.$router.push({path:"/wode",query:{name:this.username}});
           }).catch((err)=>{
             console.log('请求错误',err);
           });
