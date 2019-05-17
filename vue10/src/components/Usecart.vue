@@ -28,7 +28,7 @@
     <div class="zpl9" v-if=" showAlert">
       <img src="../images/images/警告.png" alt="">
       <div v-text="alertText"></div>
-      <button style="width: 12rem;background: #4cd964;font-size: 0.9rem" @click="ccc">确认</button>
+      <button style="width: 12rem;background: #4cd964;color:#fff;font-size: 0.9rem" @click="ccc">确认</button>
     </div>
   </div>
 </template>
@@ -114,15 +114,6 @@
     float:left;
     background: #3190e8;
   }
-  .zpl1{
-    width: 90%;
-    font-size: 1rem;
-    color: white;
-    float:left;
-    background: #3190e8;
-    text-align: center;
-    line-height: 1.5rem;
-  }
   .zpl2{
     font-size: 0.6rem;
     padding: 0.5rem;
@@ -142,6 +133,7 @@
     margin-bottom: .3rem;
   }
   .zpl4{
+    font-weight: 700;
     width: 90%;
     font-size: 0.8rem;
     line-height: 2rem;
@@ -152,6 +144,7 @@
     border-radius: 5%;
   }
   .zpl4 input{
+    color: #fff;
     text-align: center;
     /*background: green;*/
   }
@@ -174,16 +167,29 @@
   }
   .zpl9{
     width: 12rem;
-    height: 8.5rem;
+    height: 9rem;
     background: white;
     position: absolute;
     left: 2rem;
     bottom: 12rem;
     text-align: center;
     font-size: 0.7rem;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    padding-top: 1rem;
   }
   .zpl9 button{
-    color: white;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 700;
+    margin-top: .8rem;
+    background-color: #4cd964;
+    width: 100%;
+    text-align: center;
+    line-height: 1.8rem;
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border: 0;
     position: absolute;
     right: 0;
     bottom: 0;

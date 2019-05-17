@@ -100,11 +100,15 @@
             'captcha_code':this.value1,
           }).then((res)=>{
             console.log(res.data);
-            if(res.data){
+            if(res.data.message=='密码不正确'){
               this.showAlert = !this.showAlert;
-              this.alertText = '修改密码成功';
+              this.alertText = '密码不正确';
+            }else if(res.data.message=='验证码不正确'){
+              this.showAlert = true;
+              this.alertText = '验证码不正确';
             }else{
               this.showAlert = !this.showAlert;
+              this.alertText = '修改密码成功';
               this.alertText = this.data.message;
             }
           }).catch((err)=>{
@@ -125,12 +129,9 @@
       },
       bbb(){
         this.showAlert = !this.showAlert;
-        //请求验证码
-        Vue.axios.post('https://elm.cangdu.org/v1/captchas').then((res)=>{
-          this.captchaCodeImg = res.data.code;
-          console.log(res.data);
-          console.log(res);
-        })
+        if(this.alertText == '修改密码成功'){
+          this.$router.go(-1);
+        }
       },
       getCaptchaCode(){
         //请求验证码
@@ -187,19 +188,20 @@
   }
   .zpl2{
     width: 13rem;
-    height: 8rem;
+    height: 10rem;
     background: white;
     position: absolute;
     left: 1.7rem;
     bottom: 9rem;
     text-align: center;
+    padding-top: 1rem;
+
   }
   .zpl2 button{
     width: 13rem;
     position: absolute;
     right: 0;
     bottom: 0;
-    background: green;
     color: white;
   }
   .zpl2 img{
@@ -246,7 +248,7 @@
   .zpl000{
     font-size: 0.7rem;
   }
-  .btn{
+  button{
     width: 90%;
     height: 2.2rem;
     line-height: 1.3rem;
@@ -257,5 +259,8 @@
     text-align: center;
     margin-left: 5%;
     margin-top: 1rem;
+    outline: none;
+    border: 0;
+
   }
 </style>

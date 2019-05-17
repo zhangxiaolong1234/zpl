@@ -55,7 +55,7 @@
       <div class="zpl8" v-if=" showAlert">
         <img src="../images/images/警告.png" alt="">
         <div v-text="alertText"></div>
-        <button style="width: 12rem;background: green" @click="aaa">确认</button>
+        <button @click="aaa">确认</button>
       </div>
     </div>
   </div>
@@ -109,10 +109,15 @@
             'password':this.passWord,
             'captcha_code':this.yanZhengMa,
           }).then((res)=>{
-            if (res.data){
+            if (res.data.message=='密码错误'){
+              this.showAlert = true;
+              this.alertText = '密码错误';
+            }else if(res.data.message=='验证码不正确'){
+              this.showAlert = true;
+              this.alertText = '验证码不正确';
+            }else {
               console.log(res.data);
               this.$router.go(-1);
-            }else {
               this.showAlert = true;
               this.alertText = res.data.message;
             }
@@ -278,6 +283,8 @@
     text-align: center;
     margin-left: 5%;
     margin-top: 1rem;
+    outline: none;
+    border: 0;
 
   }
   .zpl8{
@@ -288,6 +295,11 @@
     left: 2.5rem;
     bottom: 8rem;
     text-align: center;
+  }
+  .zpl8 button{
+    width: 100%;
+    margin: 0;
+    margin-top: 1rem;
   }
   .zpl8 img{
     width: 35%;

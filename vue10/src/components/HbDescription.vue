@@ -83,7 +83,7 @@
     height: 1.95rem;
     background-color: #3190e8;
   }
-  .more{
+  #head_top .more{
     width: 10%;
     color: #fff;
     font-size: 1rem;

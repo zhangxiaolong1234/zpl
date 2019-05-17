@@ -227,10 +227,9 @@
     width: 16rem;
     height: 4.3rem;
     text-decoration: none;
-    background-color: white;
     margin-top: 0.4rem;
     padding-top: .5rem;
-    background: url('../images/images/hongbao.png')repeat-x;
+    background:#fff url('../images/images/hongbao.png')repeat-x;
   }
   .zpl9{
     width: 60%;
@@ -270,8 +269,8 @@
     font-size: 0.7rem;
     text-align: center;
     color: gray;
-    margin-top: 1.8rem;
-    margin-bottom: 3rem;
+    margin-top: 1.6rem;
+    margin-bottom: 2rem;
   }
   .zpl16{
     width: 100%;
