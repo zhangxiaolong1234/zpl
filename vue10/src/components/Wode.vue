@@ -3,22 +3,20 @@
       <!--<Benefit></Benefit>-->
       <router-view></router-view>
         <!--头部,展示子组件-->
-      <div>
       <!--第一导航栏部分-->
-      <div class="zplson1">
-        <router-link :to="{}"><</router-link>
-        <span class="zpl1">我的</span>
+      <div id="head_top">
+        <a @click="backUp"> <span class="more"> < </span> </a>
+        <span class="title">我的</span>
       </div>
+      <div>
       <!--头像部分-->
-      <div class="p2">
+      <div class="p2" @click="sendUser">
           <div class="p3"><img src="../images/images/8.png" alt=""></div>
           <div class="p4">
-            <span><router-link :to="{path:'/register'}">{{flag}}</router-link></span>
-            <!--<div v-else></div>-->
+            <span><a>{{flag}}</a></span>
             <p class="el-icon-mobile-phone phoneN" >暂无绑定手机号</p>
           </div>
-        <div class="p5" @click="sendUser"><router-link :to="{path:'/wode/info'}">></router-link></div>
-
+        <div class="p5" ><a>></a></div>
       </div>
 
       <!-- banner区域 -->
@@ -111,23 +109,44 @@
             phoneNumb:'暂无手机号'
           }
       },
+      beforeRouteUpdate(to, from, next) {
+        this.WhatName();
+        next()
+      },
       mounted(){
+        this.WhatName();
+    },
+      methods:{
+        backUp(){
+          this.$router.go(-1);
+        },
+        WhatName(){
           Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
             //console.log(res.data.username);
-            this.name = res.data.username;
-            if(this.name = ''){
-                this.flag = '注册/登录'
+            this.name=res.data.username;
+            if(this.name == undefined){
+              this.flag = '注册/登录'
             }else{
-              this.flag = res.data.username;
+              this.flag = this.name;
             }
-
           }).catch((err)=>{
             console.log('请求错误',err);
+          });
+
+          Vue.axios.get('https://elm.cangdu.org/promotion/v2/users/1/hongbaos?limit=20&offset=0').then((res)=>{
+            //console.log(res.data);
+            this.hongbao = res.data;
+            this.$store.state.youhui = this.hongbao;
           })
-      },
-      methods:{
+        },
         sendUser(){
-          this.$store.state.username =this.flag;
+          if(this.flag!='注册/登录'){
+            this.$store.state.username =this.flag;
+            this.$router.push("/wode/info");
+          }else{
+            this.$router.push("/register");
+          }
+
         }
       },
       components: {Benefit, Info},
@@ -146,42 +165,39 @@
   z-index: 2;
   overflow: hidden;
 }
-.zplson1{
+#head_top{
   width: 100%;
-  height: 10%;
-  background:#3190e8;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 2rem;
-  overflow: hidden;
+  height: 1.95rem;
+  background-color: #3190e8;
 }
-.zplson1 a{
+.more{
   width: 10%;
-  height: 100%;
-  display: block;
-  color: white;
-  font-size: 1.3rem;
-  float:left;
+  color: #fff;
+  height: 1.95rem;
+  margin-left:.1rem;
+  display:block;
+  position: absolute;
 }
-.zpl1{
-  width: 80%;
-  height: 100%;
-  font-size: 1rem;
-  color: white;
-  float:left;
-
+.title{
+  width: 100%;
+  text-align: center;
+  height: 1.95rem;
+  line-height:1.95rem ;
+  font-size: .8rem;
+  color: #fff;
+  font-weight: 700;
+  display: inline-block;
 }
   .p2{
     width: 100%;
-    height: 4rem;
+    height: 3.5rem;
     background:#3190e8 ;
   }
   .p3{
-
     text-align: center;
-    line-height: 2.5rem;
+    line-height: 2rem;
     float: left;
-    margin-top: 1rem;
+    margin-top: .5rem;
     margin-left: 0.5rem;
   }
  .p3 img{
@@ -195,31 +211,33 @@
     /*background: hotpink;*/
     font-size: 0.7rem;
     float: left;
-    margin-top: 1rem;
+    margin-top:.5rem;
     margin-left: 0.3rem;
   }
   .p4 span{
     display: block;
   }
   .p4 a{
-    color: white;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: .8rem;
+    color: #fff;
   }
   .p4 p.phoneN{
-    color: white;
+    font-size: .57333rem;
+    color: #fff;
   }
   .p5{
-    padding-right: .3rem;
+    padding-right: .4rem;
   }
   .p5 a{
     font-size: 1rem;
     float: right;
     color: white;
-    margin-top: 1.5rem;
+    margin-top: .8rem;
   }
 .bg-purple a{
   font-size: 1rem;
-  color: orangered;
+  color: #f90;
   text-align: center;
 }
 .bg-purple-light a{

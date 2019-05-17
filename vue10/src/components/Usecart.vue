@@ -1,12 +1,12 @@
 <template>
   <div class="usecart">
     <!--第一导航栏部分-->
-    <div class="zplson1">
-      <router-link :to="{path:'/vipcard'}"><</router-link>
-      <span class="zpl1">会员中心</span>
+    <div id="head_top">
+      <routerLink :to="{path:'/vipcard'}" class="more"> < </routerLink>
+      <span class="title">会员中心</span>
     </div>
     <div class="zpl2">
-      <p>成功兑换后将关联到当前账号: <span>喊你打开为空的</span></p>
+      <p>成功兑换后将关联到当前账号: <span>{{$store.state.username}}</span></p>
     </div>
     <div class="zpl3">
       <input type="text" placeholder="请输入10位卡号"  v-model="kaHao"  @input="reg" maxlength="10">
@@ -17,7 +17,7 @@
       <input type="text" placeholder="兑换" :disabled="disabled" @click="aaa" :class="{green:isgreen}">
     </div>
     <div class="zpl5">
-      <h6>-温馨提示-</h6>
+      <h6>——温馨提示——</h6>
       <p>新兑换的会员服务，权益以「会员说明」为准。</p>
       <p>月卡：30次减免配送费。</p>
       <p>季卡：90次减免配送费。</p>
@@ -81,9 +81,30 @@
     background: #f1f1f1;
     overflow-y: hidden;
   }
-  .zplson1{
+  #head_top{
     width: 100%;
-    overflow: hidden;
+    height: 1.95rem;
+    background-color: #3190e8;
+  }
+  .more{
+    width: 10%;
+    color: #fff;
+    font-size: 1rem;
+    height: 1.95rem;
+    line-height: 1.95rem;
+    padding-left:.3rem;
+    display:block;
+    position: absolute;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
   }
   .zplson1 a{
     width: 10%;
@@ -107,13 +128,18 @@
     padding: 0.5rem;
   }
   .zpl2 span{
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    font-weight: 700;
   }
   input{
+    display: block;
     outline: none;
     width: 100%;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     line-height: 1.5rem;
+    border: 0;
+    padding:.3rem;
+    margin-bottom: .3rem;
   }
   .zpl4{
     width: 90%;
@@ -130,14 +156,18 @@
     /*background: green;*/
   }
   .zpl5 p{
-    font-size: 0.6rem;
-    color: #ccc;
-    padding-left: 2.5rem;
+    width: 80%;
+    font-size: .5rem;
+    color: #aaa;
+    line-height: .8rem;
+    margin-left: 10%;
   }
   h6{
     text-align: center;
-    margin-bottom: 1rem;
-    color: #ccc;
+    font-weight: 400;
+    font-size: .65rem;
+    color: #aaa;
+    margin-bottom: .6rem;
   }
   .green{
     background: #4cd964;

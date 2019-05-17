@@ -1,9 +1,9 @@
 <template>
     <div class="download">
       <!--第一导航栏部分-->
-      <div class="zplson1">
-        <router-link :to="{path:'/wode'}"><</router-link>
-        <span class="zpl1">下载</span>
+      <div id="head_top">
+        <routerLink :to="{path:'/wode'}" class="more"> < </routerLink>
+        <span class="title">下载</span>
       </div>
       <div class="zpl2">
         <img src="../images/images/elmlogo.jpeg" alt="">
@@ -48,9 +48,30 @@
     height: 100%;
     background: white;
   }
-  .zplson1{
+  #head_top{
     width: 100%;
-    overflow: hidden;
+    height: 1.95rem;
+    background-color: #3190e8;
+  }
+  .more{
+    width: 10%;
+    color: #fff;
+    font-size: 1rem;
+    height: 1.95rem;
+    line-height: 1.95rem;
+    padding-left:.3rem;
+    display:block;
+    position: absolute;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
   }
   .zplson1 a{
     width: 10%;

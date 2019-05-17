@@ -1,9 +1,9 @@
 <template>
   <div class="invoiceRecord">
     <!--第一导航栏部分-->
-    <div class="zplson1">
-      <router-link :to="{path:'/vipcard'}"><</router-link>
-      <span class="zpl1">购买记录</span>
+    <div id="head_top">
+      <routerLink :to="{path:'/vipcard'}" class="more"> < </routerLink>
+      <span class="title">购买记录</span>
     </div>
     <img src="../images/images/no-log.png" alt="">
     <p>没有购买记录</p>
@@ -27,9 +27,30 @@
     background: white;
     overflow-y: hidden;
   }
-  .zplson1{
+  #head_top{
     width: 100%;
-    overflow: hidden;
+    height: 1.95rem;
+    background-color: #3190e8;
+  }
+  .more{
+    width: 10%;
+    color: #fff;
+    font-size: 1rem;
+    height: 1.95rem;
+    line-height: 1.95rem;
+    padding-left:.3rem;
+    display:block;
+    position: absolute;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
   }
   .zplson1 a{
     width: 10%;

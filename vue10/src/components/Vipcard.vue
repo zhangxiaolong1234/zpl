@@ -1,19 +1,19 @@
 <template>
   <div class="vipcard">
     <!--第一导航栏部分-->
-    <div class="zplson1">
-      <router-link :to="{path:'/wode'}"><</router-link>
-      <span class="zpl1">会员中心</span>
+    <div id="head_top">
+      <routerLink :to="{path:'/wode'}" class="more"> < </routerLink>
+      <span class="title">会员中心</span>
     </div>
     <!--显示用户名 -->
     <div class="zpl2">
-      <span class="a">为账户</span><span class="zpl3"> 喊你打开为空的 </span><span class="a">购买会员</span>
+      <p class="a">为账户<span class="zpl3"> {{userName}} </span>购买会员</p>
     </div>
     <!--会员特权-->
     <div class="zpl4">
       <div class="zpl5">
         <p>会员特权</p>
-        <router-link :to="{}">会员说明></router-link>
+        <router-link :to="{path:'/vipdescription'}">会员说明></router-link>
       </div>
     </div>
     <!--减免配送费-->
@@ -56,8 +56,20 @@
 </template>
 
 <script>
+  import  Vue from  'vue';
   export default {
-    name: "Vipcard"
+    name: "Vipcard",
+    data(){
+      return{
+        userName:''
+      }
+    },
+    mounted(){
+      Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
+        this.userName=res.data.username;
+        this.$store.state.username = this.userName;
+      });
+    }
   }
 </script>
 
@@ -72,9 +84,30 @@
     background: #f1f1f1;
     overflow-y: hidden;
   }
-  .zplson1{
+  #head_top{
     width: 100%;
-    overflow: hidden;
+    height: 1.95rem;
+    background-color: #3190e8;
+  }
+  .more{
+    width: 10%;
+    color: #fff;
+    font-size: 1rem;
+    height: 1.95rem;
+    line-height: 1.95rem;
+    padding-left:.3rem;
+    display:block;
+    position: absolute;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
   }
   .zplson1 a{
     width: 10%;
@@ -84,23 +117,26 @@
     float:left;
     background: #3190e8;
   }
-  .zpl1{
+  .zpl11{
     width: 90%;
     font-size: 1rem;
-    color: white;
-    float:left;
-    background: #3190e8;
-    text-align: center;
-    line-height: 1.5rem;
+    line-height: 2rem;
+    border-bottom: 1px #eee solid;
+    margin-bottom: .5rem;
   }
   .zpl2{
     font-size:0.7rem;
     padding:0.3rem ;
   }
   .a{
-    color: darkgray;
+    font-size: .6rem;
+    color: #666;
+    line-height:1.6rem;
+    padding-left: .5rem;
   }
   .zpl3{
+    color: #000;
+    font-weight: 700;
     font-size: 0.7rem;
   }
   .zpl4{
@@ -129,14 +165,14 @@
   }
   .zpl7{
     width: 100%;
-    /*background: yellow;*/
     overflow: hidden;
     margin: 0.2rem;
-    border-top: 0.01rem solid darkgrey;
+    border-top: 0.01rem solid #eee;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
   }
   .zpl8{
     width: 25%;
-    /*background: grey;*/
     float: left;
 
   }
@@ -188,16 +224,18 @@
     color: orange;
     border: 0.05rem solid orange;
     border-radius: 8%;
-    border-color: orange;
+  }
+  .zpl13 a{
+    color:orange ;
   }
   .zpl14{
     width: 100%;
+    line-height: 2.5rem;
     font-size: 0.7rem;
     padding:0 1rem;
     background-color: white;
     margin-top: 0.4rem;
     overflow: hidden;
-    line-height: 1.5rem;
   }
   .zpl14 p{
     float: left;

@@ -1,9 +1,9 @@
 <template>
   <div class="reset">
     <!--第一导航栏部分-->
-    <div class="zplson1">
+    <div id="head_top">
       <a @click="backUp"> <span class="more"> < </span> </a>
-      <span class="zpl1">重置密码</span>
+      <span class="title">重置密码</span>
     </div>
     <!--表单部分-->
     <form action="###">
@@ -23,7 +23,8 @@
     </form>
     <!--确认修改-->
     <!--第四部分,登录按钮-->
-    <button class="btn btn-primary btn-lg"style="width: 15rem;background: green" @click="login">确认修改</button>
+    <button class="btn" @click="login">确认修改</button>
+
     <div class="zpl2" v-if=" showAlert">
       <img src="../images/images/警告.png" alt="">
       <div v-html="alertText"></div>
@@ -144,22 +145,33 @@
 </script>
 
 <style scoped>
-  input{
-    outline: none;
-  }
   .reset{
     width:100%;
     height: 100%;
-    background:gainsboro;
+    background:#f5f5f5;
   }
-  .zplson1{
+  #head_top{
     width: 100%;
-    height: 3rem;
-    background:#3190e8;
+    height: 1.95rem;
+    background-color: #3190e8;
+  }
+  .more{
+    width: 10%;
+    color: #fff;
     font-size: 1rem;
+    height: 1.95rem;
+    line-height: 1.95rem;
+    padding-left:.3rem;
+  }
+  .title{
+    width: 77%;
     text-align: center;
-    line-height: 3rem;
-    margin-bottom: 1rem;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
   }
   .zplson1 a{
     width: 10%;
@@ -168,15 +180,6 @@
     color: white;
     font-size: 1.3rem;
     float:left;
-  }
-  .zpl1{
-    display: block;
-    width: 50%;
-    height: 100%;
-    font-size: 1.3rem;
-    color: white;
-    float:left;
-    margin-left: 2rem;
   }
   button{
     margin-top: 1rem;
@@ -199,7 +202,6 @@
     background: green;
     color: white;
   }
-
   .zpl2 img{
     width: 35%;
     height: 4rem;
@@ -214,21 +216,28 @@
 
   }
   .zpl3{
-    border-bottom: 1px solid gray;
+    border-bottom:2px #f5f5f5 solid ;
   }
   .zpl3 input{
+    border: 0;
     width: 100%;
     height: 2rem;
+    padding-left: .5rem;
   }
   .zpl0{
     width: 100%;
     height: 3rem;
   }
   input{
-    width: 8rem;
+    outline: none;
   }
   .zpl00{
     line-height: 2.5rem;
+  }
+  .zpl00 input{
+    border: 0;
+    width: 8rem;
+    padding-left: .5rem;
   }
   img{
     width: 3rem;
@@ -236,5 +245,17 @@
   }
   .zpl000{
     font-size: 0.7rem;
+  }
+  .btn{
+    width: 90%;
+    height: 2.2rem;
+    line-height: 1.3rem;
+    font-size: .7rem;
+    color: #fff;
+    background-color: #4cd964;
+    border-radius: .15rem;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 1rem;
   }
 </style>

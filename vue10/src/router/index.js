@@ -14,6 +14,7 @@ import Balancecard from '../components/Balancecard';
 import Integral from '../components/Integral';
 import Info from '../components/Info';
 import Benefit from '../components/Benefit';
+import Coupon from '../components/Coupon';
 import HbDescription from '../components/HbDescription';
 import HbExchange from '../components/HbExchange';
 import HbRecommend from '../components/HbRecommend';
@@ -25,13 +26,10 @@ import ChangeAdd from '../components/ChangeAdd';
 import AppendAdd from '../components/AppendAdd';
 import SearchAdd from '../components/SearchAdd';
 import SearchMaster from '../components/SearchMaster';
-//会员中心
 import Vipcard from '../components/Vipcard';
-//在线支付
+import vipDescription from '../components/vipDescription';
 import Payment from '../components/Payment';
-//兑换会员
 import Usecart from '../components/Usecart';
-//购买记录
 import InvoiceRecord from '../components/InvoiceRecord';
 
 export default new Router({
@@ -62,6 +60,7 @@ export default new Router({
     {path:'/benefit',component:Benefit,children:[
         {path:'hbdescription',component:HbDescription},
       ]},
+    {path:'/coupon',component:Coupon},
     {path:'/hbexchange',component:HbExchange},
     {path:'/hbrecommend',component:HbRecommend},
     {path:'/hbHistory',component:HbHistory},
@@ -69,6 +68,7 @@ export default new Router({
     {path:'/integralcard',component:Integralcard},
     {path:'/searchMaster',component:SearchMaster},
     {path:'/vipcard',component:Vipcard},
+    {path:'/vipdescription',component:vipDescription},
     {path:'/payment',component:Payment},
     {path:'/usecart',component:Usecart},
     {path:'/invoiceRecord',component:InvoiceRecord},

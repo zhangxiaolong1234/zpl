@@ -3,12 +3,10 @@
   <div class="register">
 
     <!--第一导航栏部分-->
-    <div class="zplson1">
-      <!--<span class="zpl0"><</span>-->
+    <div id="head_top">
       <a @click="backUp"> <span class="more"> < </span> </a>
-      <span class="zpl1">密码登录</span>
+      <span class="title">密码登录</span>
     </div>
-
     <!--第二部分,输入框部分-->
     <!--开始判断点击的是登录还是注册-->
 
@@ -50,7 +48,7 @@
     </div>
 
     <!--第四部分,登录按钮-->
-    <button class="btn btn-primary btn-lg"style="width: 15rem;background: green" @click="login">登录</button>
+    <button class="btn  btn-lg" @click="login">登录</button>
     <div class="zpl7">
       <router-link :to="{path:'/reset'}">重置密码?</router-link>
       <!--弹框-->
@@ -118,8 +116,7 @@
               this.showAlert = true;
               this.alertText = res.data.message;
             }
-            console.log(res.data.username);
-            this.$router.push({path:"/wode",query:{name:this.username}});
+            //this.$router.push({path:"/wode",query:{name:this.username}});
           }).catch((err)=>{
             console.log('请求错误',err);
           });
@@ -159,18 +156,38 @@
 </script>
 
 <style scoped>
+  input,input:focus{
+    border: none !important;
+    box-shadow: none !important;
+    outline: none;
+  }
   .register{
     width:100%;
     height: 100%;
-    background:gainsboro;
+    background:#f5f5f5;
   }
-  .zplson1{
+  #head_top{
     width: 100%;
-    height: 3rem;
-    background:#3190e8;
+    height: 1.95rem;
+    background-color: #3190e8;
+  }
+  .more{
+    width: 10%;
+    color: #fff;
     font-size: 1rem;
+    height: 1.95rem;
+    line-height: 1.95rem;
+    padding-left:.3rem;
+  }
+  .title{
+    width: 77%;
     text-align: center;
-    line-height: 3rem;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 700;
+    display: inline-block;
   }
   .zplson1 a{
     width: 10%;
@@ -181,18 +198,6 @@
     float:left;
     /*background: blue;*/
   }
-  .zpl1{
-    display: block;
-    width: 50%;
-    height: 100%;
-    font-size: 1.3rem;
-    color: white;
-    float:left;
-    /*background: red;*/
-    margin-left: 2rem;
-    /*line-height: 10px;*/
-    /*text-align: center;*/
-  }
 
   section{
     width: 100%;
@@ -201,13 +206,13 @@
     background: white;
   }
   .zpl2{
-    padding: 0.7rem;
-    border-bottom: 1px solid gray;
+    padding:0.3rem 0 0.3rem 0.8rem;
+    border-bottom: 2px solid #f5f5f5;
     /*background: red;*/
   }
   .zpl3{
-    padding: 0.7rem;
-    border-bottom: 1px solid gray;
+    padding:0.3rem 0 0.3rem 0.8rem;
+    border-bottom: 2px solid #f5f5f5;
     /*background: yellow;*/
   }
   .zpl0{
@@ -218,7 +223,11 @@
     width: 8rem;
   }
   .zpl00{
+    padding-left: .8rem;
     line-height: 2.5rem;
+  }
+  .zpl00 input{
+    width: 7rem;
   }
   img{
     width: 3rem;
@@ -226,12 +235,13 @@
   }
   .zpl3-1{
     float: right;
+    padding-right: 1rem;
   }
   .zpl4 a{
     font-size: 0.5rem;
   }
   input{
-    font-size: 1rem;
+    font-size: .7rem;
     border: none;
   }
   .zpl5{
@@ -243,11 +253,14 @@
   .zpl000{
     font-size: 0.7rem;
   }
+  .zpl000 input{
+    width: 5rem;
+  }
   .zpl6{
     font-size: 0.7rem;
     color: red;
-    margin-left: 0.5rem;
-    margin: 0.3rem;
+    margin-left: .5rem;
+    margin:.3rem;
   }
   .zpl7{
     font-size: 0.8rem;
@@ -255,8 +268,17 @@
     padding: 1rem;
   }
   button{
+    width: 90%;
+    height: 2.2rem;
+    line-height: 1.3rem;
+    font-size: .7rem;
+    color: #fff;
+    background-color: #4cd964;
+    border-radius: .15rem;
+    text-align: center;
+    margin-left: 5%;
     margin-top: 1rem;
-    margin-left: 0.5rem;
+
   }
   .zpl8{
     width: 12rem;
@@ -266,12 +288,6 @@
     left: 2.5rem;
     bottom: 8rem;
     text-align: center;
-  }
-  .zpl8 button{
-    color: white;
-    position: absolute;
-    right: 0;
-    bottom: 0;
   }
   .zpl8 img{
     width: 35%;
