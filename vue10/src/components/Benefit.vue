@@ -111,13 +111,13 @@
           console.log('222');
         }
       },
-      // mounted(){
-      //     Vue.axios.get('https://elm.cangdu.org/promotion/v2/users/1/hongbaos?limit=20&offset=0').then((res)=>{
-      //       console.log(res.data);
-      //       this.hongbao = res.data;
-      //       this.$store.state.youhui = this.hongbao;
-      //     })
-      // },
+      mounted(){
+          Vue.axios.get('https://elm.cangdu.org/promotion/v2/users/1/hongbaos?limit=20&offset=0').then((res)=>{
+            console.log(res.data);
+            this.hongbao = res.data;
+            this.$store.state.youhui = this.hongbao;
+          })
+      },
 
     }
 </script>
