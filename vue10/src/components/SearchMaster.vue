@@ -97,7 +97,11 @@
           Vue.axios.get('https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword='+this.value).then((res) => {
             console.log(res.data);
             this.MasterInfor=res.data;
-            if(this.MasterInfor.message=='关键词参数错误'||'搜索餐馆数据失败'){
+            if(this.MasterInfor.message=='关键词参数错误'){
+              this.noneResult=true;
+            }else if(this.MasterInfor.message=='搜索餐馆数据失败'){
+              this.noneResult=true;
+            }else if(this.MasterInfor.length==0){
               this.noneResult=true;
             }else{
               this.shop=true;

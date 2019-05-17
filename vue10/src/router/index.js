@@ -25,6 +25,15 @@ import ChangeAdd from '../components/ChangeAdd';
 import AppendAdd from '../components/AppendAdd';
 import SearchAdd from '../components/SearchAdd';
 import SearchMaster from '../components/SearchMaster';
+//会员中心
+import Vipcard from '../components/Vipcard';
+//在线支付
+import Payment from '../components/Payment';
+//兑换会员
+import Usecart from '../components/Usecart';
+//购买记录
+import InvoiceRecord from '../components/InvoiceRecord';
+
 export default new Router({
   routes: [
     {path:'/',redirect:'/wode'},
@@ -59,5 +68,9 @@ export default new Router({
     {path:'/download',component:Download},
     {path:'/integralcard',component:Integralcard},
     {path:'/searchMaster',component:SearchMaster},
+    {path:'/vipcard',component:Vipcard},
+    {path:'/payment',component:Payment},
+    {path:'/usecart',component:Usecart},
+    {path:'/invoiceRecord',component:InvoiceRecord},
   ]
 })

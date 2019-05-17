@@ -3,33 +3,74 @@
       <div id="head_top">
         <router-link :to="{path:'/benefit'}"><span class="more"> < </span></router-link>
         <span class="title">推荐有奖</span>
-        <img src="../images/images/activity.png" alt="">
       </div>
-        <div class="content">
-          <div class="app">
-              <ul class="pic">
-                  <li><img src="../images/images/qq.png" alt=""></li>
-                  <li><img src="../images/images/weixin.png" alt=""></li>
-                  <li><img src="../images/images/fenxiang.png" alt=""></li>
-                </ul>
-                  <ul class="pic">
-                    <li>邀请QQ好友</li>
-                    <li>邀请微信好友</li>
-                    <li>面对面邀请</li>
-                  </ul>
-          </div>
+      <img class="banner" src="../images/images/activity.png" alt="">
+      <!--微信 QQ 图标-->
+      <div class="zpl3">
+        <div class="zpl4">
+          <img src="../images/images/weixin.png" alt="" class="a" @click="show">
+          <p class="b">邀请微信好友</p>
         </div>
+        <div class="zpl5">
+          <img src="../images/images/qq.png" alt="" class="a" @click="show">
+          <p class="b">邀请QQ好友</p>
+        </div>
+        <div class="zpl6">
+          <img src="../images/images/fenxiang.png" alt="" class="a" @click="show">
+          <p class="b">面对面邀请</p>
+        </div>
+      </div>
+      <!--累计收益--成功邀请-->
+      <div class="zpl7">
+        <div class="zpl8">
+          <p>累计收益</p>
+          <span class="zpl10">0</span>
+          <span>元</span>
+        </div>
+        <div class="zpl9">
+          <p>成功邀请</p>
+          <span class="zpl11">0</span>
+          <span>人</span>
+        </div>
+      </div>
+      <!--收益明细-->
+      <div class="zpl12">
+        <p>-收益明细-</p>
+        <img src="../images/images/qianbao.png" alt="">
+        <p class="zpl14">还不赶紧去邀请好友</p>
+      </div>
+      <!--弹框-->
+      <div class="zpl13" v-if="showAlert">
+        <img src="../images/images/警告.png" alt="">
+        <div v-text="alertText"></div>
+        <button style="width: 12rem;background: green" @click="hide">确认</button>
+      </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "HbRecommend"
+        name: "HbRecommend",
+      data(){
+        return{
+          showAlert:false,//控制弹框显隐
+          alertText:null,//控制弹框内容
+        }
+      },
+      methods:{
+        show(){
+          this.showAlert = true;
+          this.alertText = '请在饿了吗APP中打开';
+        },
+        hide(){
+          this.showAlert = false;
+        },
+      },
     }
 </script>
 
 <style scoped>
-  .HbExchange{
+  .HbRecommend{
     width: 100%;
     height: 100%;
     background-color: #f5f5f5;
@@ -57,17 +98,88 @@
     font-weight: 700;
     display: inline-block;
   }
-  #head_top img{
+  .banner{
     width: 100%;
   }
-  .content{
+  .zpl2 img{
     width: 100%;
+    height: 6rem;
   }
-  .app{
-    padding: 1rem 0;
-    background-color: #fff;
+  .zpl3{
+    width: 100%;
+    background: white;
+    margin-top: 0.3rem;
+    overflow: hidden;
+    padding: 0.3rem;
   }
-  ul li{
+  .zpl4,.zpl5,.zpl6{
+    width: 33%;
     float: left;
+    font-size: 0.5rem;
+    text-align: center;
+    background: white;
+  }
+  .a{
+    width: 50%;
+  }
+  .b{
+    margin-top: 0.5rem;
+  }
+  .zpl7{
+    width: 100%;
+    /*background: red;*/
+    overflow: hidden;
+    margin-top: 0.3rem;
+  }
+  .zpl8,.zpl9{
+    width: 50%;
+    float: left;
+    text-align: center;
+    font-size: 0.6rem;
+    padding: 0.2rem;
+  }
+  .zpl8{
+    border-right: 0.01rem solid darkgray;
+  }
+  .zpl10{
+    font-size: 1rem;
+    color: orangered;
+  }
+  .zpl11{
+    font-size: 1rem;
+    color: darkgray;
+  }
+  .zpl12{
+    font-size: 0.7rem;
+    text-align: center;
+    margin-top: 0.6rem;
+  }
+  .zpl12 img{
+    width: 10%;
+    margin: 0.8rem 0 0.3rem 0;
+  }
+  .zpl13{
+    width: 12rem;
+    height: 8.5rem;
+    background: white;
+    font-size: 0.7rem;
+    position: absolute;
+    left: 2.5rem;
+    bottom: 15rem;
+    text-align: center;
+  }
+  .zpl13 button{
+    font-size: 1rem;
+    color: white;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  .zpl13 img{
+    width: 35%;
+    margin-bottom: 0.5rem;
+  }
+  .zpl14{
+    color:darkgray;
   }
 </style>

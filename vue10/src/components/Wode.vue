@@ -66,7 +66,7 @@
        </div>
        </router-link>
        <br>
-       <router-link :to="{path:''}">
+       <router-link :to="{path:'/vipcard'}">
        <div  class="el-icon-potato-strips">
          饿了么会员卡
          <span>></span>
