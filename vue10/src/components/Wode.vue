@@ -127,7 +127,7 @@
           //   this.$store.state.username= '注册/登录';
           // }
           Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
-            console.log(res.data.username);
+            //console.log(res.data.username);
             this.name=res.data.username;
             if(this.name == undefined){
               this.flag = '注册/登录';

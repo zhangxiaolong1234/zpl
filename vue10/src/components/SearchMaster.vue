@@ -10,15 +10,17 @@
         <button @click="SearchInfor">提交</button>
       </div>
       <!--搜索历史列表-->
-      <h3 v-show="h3">搜索历史</h3>
-      <div class="history" v-show="shower2">
-          <div class="list" v-for="(li,index) in historyList">
+      <div class="searchHistoryList">
+          <h3 v-show="h3">搜索历史</h3>
+          <div class="history" v-show="shower2">
+            <div class="list" v-for="(li,index) in historyList">
               <p class="li" >
                 <span class="li1">{{li}}</span>
                 <span class="li2"  @click="closeliHistory(li,index)">x</span>
               </p>
-        </div>
-        <p class="lihis" @click="closeHistory" v-show="clearHistory">清空搜索历史</p>
+            </div>
+            <p class="lihis" @click="closeHistory" v-show="clearHistory">清空搜索历史</p>
+          </div>
       </div>
 
       <!--无搜索结果-->
