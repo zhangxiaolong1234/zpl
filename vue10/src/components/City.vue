@@ -1,9 +1,15 @@
 <template>
     <div class="city_container">
       <!--头部-->
-      <Head :head-title="cityname" go-back="true">
-        <router-link :to="{path:'/home'}" slot="changecity" class="change_city">切换城市</router-link>
-      </Head>
+      <head class="nav">
+        <router-link :to="{path:'/home'}">
+          <Icon type="ios-arrow-back" />
+        </router-link>
+        <span class="change_city">{{cityname}}</span>
+        <router-link class="fr" :to="{path:'/home'}">
+          <span class="head_logo head_text">切换城市</span>
+        </router-link>
+      </head>
       <!--搜索信息-->
       <form class="city_form" v-on:submit.prevent>
         <div>
@@ -29,12 +35,10 @@
 
 <script>
     import Vue from 'vue';
-    import Head from '../Header/Head';
     import {setStore,getStore,removeStore} from "../LocalStorage/storeLocalStorage";
     export default {
         name: "City",
-      components: {Head},
-      data() {
+        data() {
           return {
             // 搜索地址
             inputVaule:'',
@@ -71,10 +75,9 @@
           //提交信息获取所有的地址
           postpois() {
             if (this.inputVaule) {
-              // console.log(this.cityid);
-              Vue.axios.get('https://elm.cangdu.org/v1/pois?city_id='+parseInt(this.cityid)+'&keyword='+this.inputVaule+'&type=search').then((res)=>{
-                // console.log(res.data);
+              Vue.axios.get('/v1/pois?cityid='+this.cityid+'&keyword='+this.inputVaule+'&type=search').then((res)=>{
                 this.historytitle = false;
+                // console.log(res);
                 this.placelist = res.data;
                 this.placeNone = res.data.length ? false : true;
               })
@@ -121,12 +124,44 @@
     height: 100%;
   }
   /*头部*/
+  .nav {
+    width: 100%;
+    height: 1.95rem;
+    background-color: #3190e8;
+    position: relative;
+  }
+  .ivu-icon {
+    width: 1rem;
+    height: 1rem;
+    line-height: 2.2rem;
+    margin-left: .4rem;
+    color: #fff;
+  }
+
   .change_city {
     position: absolute;
-    right: 0.4rem;
-    top:30%;
-    font-size: .6rem;
+    top: 20%;
+    left: 44%;
+    font-size: .8rem;
     color: #fff;
+    font-weight: 700;
+  }
+  .head_logo {
+    margin-left: 0.4rem;
+    font-weight: 400;
+    font-size: .7rem;
+    color: #fff;
+    width: 2.3rem;
+    height: .7rem;
+    margin-top: .5rem;
+  }
+  .head_text {
+    font-size: .65rem;
+  }
+  .fr {
+    position: absolute;
+    right: .4rem;
+    top: .1rem;
   }
   /*form表单*/
   .city_form {
@@ -134,7 +169,6 @@
     border-top: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
     padding-top: .4rem;
-    margin-top: 1.95rem;
   }
   .city_form div {
     width: 90%;

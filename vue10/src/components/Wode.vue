@@ -13,7 +13,7 @@
       <div class="p2" @click="sendUser">
           <div class="p3"><img src="../images/images/8.png" alt=""></div>
           <div class="p4">
-            <span><a>{{flag}}</a></span>
+            <span><a>{{this.flag}}</a></span>
             <p class="el-icon-mobile-phone phoneN" >暂无绑定手机号</p>
           </div>
         <div class="p5" ><a>></a></div>
@@ -50,14 +50,14 @@
         </div>
       </div>
      <div class="p6">
-       <router-link :to="{path:''}">
+       <router-link :to="{path:'/order'}">
        <div  class="el-icon-s-unfold">
          我的订单
          <span>></span>
        </div>
        </router-link>
        <br>
-       <router-link :to="{path:''}">
+       <router-link :to="{path:'/'}">
        <div  class="el-icon-s-goods">
            积分商城
          <span>></span>
@@ -88,6 +88,7 @@
         </router-link>
       </div>
     </div>
+      <Footer></Footer>
     </div>
 </template>
 
@@ -98,6 +99,7 @@
     import ElementUI from 'element-ui';
     import 'element-ui/lib/theme-chalk/index.css';
     import Benefit from "./Benefit";
+    import Footer from "./Footer";
 
     Vue.use(ElementUI);
     export default {
@@ -121,11 +123,15 @@
           this.$router.go(-1);
         },
         WhatName(){
+          // if(this.$store.state.username == null){
+          //   this.$store.state.username= '注册/登录';
+          // }
           Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
-            //console.log(res.data.username);
+            console.log(res.data.username);
             this.name=res.data.username;
             if(this.name == undefined){
-              this.flag = '注册/登录'
+              this.flag = '注册/登录';
+              //this.$store.state.username= '注册/登录';
             }else{
               this.flag = this.name;
             }
@@ -137,7 +143,8 @@
             //console.log(res.data);
             this.hongbao = res.data;
             this.$store.state.youhui = this.hongbao;
-          })
+          });
+          //this.flag=this.$store.state.username;
         },
         sendUser(){
           if(this.flag!='注册/登录'){
@@ -149,7 +156,7 @@
 
         }
       },
-      components: {Benefit, Info},
+      components: {Footer, Benefit, Info},
     }
 </script>
 

@@ -2,7 +2,7 @@
   <div class="UserInfor">
     <router-view/>
     <div id="head_top">
-      <routerLink :to="{path:'/wode'}" class="more" @click="changeuser"> < </routerLink>
+      <a @click="backUp"> <span class="more"> < </span> </a>
       <span class="title">账户信息</span>
     </div>
     <div class="photo">
@@ -25,7 +25,7 @@
       <router-link :to="{path:'/wode/info/changeName'}">
         <div class="left left2"><span>用户名</span></div>
         <div class="right right2">
-          <span class="name">{{this.$store.state.username}}</span>
+          <span class="name">{{name}}</span>
           <span class="icon"> > </span>
         </div>
         <div class="clear"></div>
@@ -36,7 +36,7 @@
       <router-link :to="{path:'/wode/info/changeAdd'}">
         <div class="left left2"><span>收货地址</span></div>
         <div class="right right2">
-          <span class="name">{{this.$store.state.firstadd}}</span>
+          <span class="name">{{this.firstadd}}</span>
           <span class="icon"> > </span>
         </div>
         <div class="clear"></div>
@@ -81,6 +81,7 @@
 </template>
 
 <script>
+  import  Vue from  'vue';
   import ChangeName from "./ChangeName";
   import ChangeAdd from "./ChangeAdd";
   export default {
@@ -88,19 +89,45 @@
     components: {ChangeName,ChangeAdd},
     data(){
       return{
+        name:'',
+        userName:'',
         show:false,     //显示提示框
         isEnter:true,  //是否登录
         isLeave:false, //是否退出
         showAlert: false,
         alertText: null,
-        newName:'aaa',
         Alert2: false,
+        userID:'',
+        firstadd:'',
       }
-
+    },
+    beforeRouteUpdate(to, from, next) {
+      this.changeAdd();
+      next()
+    },
+    mounted(){
+      this.changeAdd();
     },
     methods:{
-      changeuser(){
-        this.$store.state.username=this.$store.state.username;
+      backUp(){
+        this.$router.push('/wode');
+      },
+      changeAdd(){
+        this.name=this.$store.state.username;
+        Vue.axios.get('https://elm.cangdu.org/v1/user').then(res=>{
+          //console.log(res.data.username);
+          this.userName=res.data.username;
+          this.userID=res.data.user_id;
+          Vue.axios.get('https://elm.cangdu.org/v1/users/'+this.userID+'/addresses').then((res)=>{
+            //console.log(res.data);
+            if(res.data!=[]){
+              this.firstadd=res.data[0].address;
+            }else{
+              this.firstadd='';
+            }
+
+          });
+        })
       },
       changePhone(){
         this.showAlert = true;
@@ -115,8 +142,11 @@
       },
       back(){
         this.Alert2 = false;
+        Vue.axios.get('https://elm.cangdu.org/v2/signout').then((res)=>{
+          console.log(res.data);
+          this.$store.state.username=null;
+        });
         this.$router.push("/wode");
-        this.$store.state.username='';
       }
     }
 
@@ -194,6 +224,8 @@
   }
   .right2{
     width: 70%;
+    height: 2rem;
+    overflow: hidden;
   }
   .file{
     width:100%;

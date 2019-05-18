@@ -1,8 +1,8 @@
 <template>
   <div class="invoiceRecord">
     <!--第一导航栏部分-->
-    <div id="head_top">
-      <routerLink :to="{path:'/vipcard'}" class="more"> < </routerLink>
+    <div  id="head_top">
+      <router-link :to="{path:'/vipcard'}"><span class="more"> < </span></router-link>
       <span class="title">购买记录</span>
     </div>
     <img src="../images/images/no-log.png" alt="">
@@ -32,13 +32,11 @@
     height: 1.95rem;
     background-color: #3190e8;
   }
-  .more{
+  #head_top  .more{
     width: 10%;
     color: #fff;
-    font-size: 1rem;
     height: 1.95rem;
-    line-height: 1.95rem;
-    padding-left:.3rem;
+    margin-left:.1rem;
     display:block;
     position: absolute;
   }
@@ -59,15 +57,6 @@
     font-size: 1rem;
     float:left;
     background: #3190e8;
-  }
-  .zpl1{
-    width: 90%;
-    font-size: 1rem;
-    color: white;
-    float:left;
-    background: #3190e8;
-    text-align: center;
-    line-height: 1.5rem;
   }
   img{
     padding: 1rem 1rem;

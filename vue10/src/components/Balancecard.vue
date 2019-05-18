@@ -2,9 +2,9 @@
     <div class="balancecard">
       <div class="zplson1">
         <!-- < 按钮部分-->
-        <div class="l1">
-          <router-link :to="{path:'/balance'}"><</router-link>
-          <span class="zpl1">余额问题</span>
+        <div id="head_top">
+          <router-link :to="{path:'/balance'}"><span class="more"> < </span></router-link>
+          <span class="title">余额问题</span>
         </div>
         <ul>
           <li>
@@ -62,6 +62,29 @@
     font-size: 1rem;
     text-align: center;
     line-height: 2rem;
+  }
+  #head_top{
+    width: 100%;
+    height: 1.95rem;
+    background-color: #3190e8;
+  }
+  #head_top  .more{
+    width: 10%;
+    color: #fff;
+    height: 1.95rem;
+    margin-left:.1rem;
+    display:block;
+    position: absolute;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    display: inline-block;
+    font-weight: 700;
   }
   .l1 a{
     display: block;

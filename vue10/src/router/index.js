@@ -29,7 +29,6 @@ import Shop from '../components/Shop';
 import ShopDetail from '../components/ShopDetail';
 import FoodDetail from '../components/FoodDetail';
 import ConfirmOrder from '../components/ConfirmOrder';
-import Payment from '../components/Payment';
 import Remark from '../components/Remark';
 import AddAddress from '../components/AddAddress';
 import SearchAddress from "../components/SearchAddress";
@@ -48,7 +47,7 @@ import Vipcard from '../components/Vipcard';
 export default new Router({
   routes: [
     {path:'/',redirect:'/home'},
-    {path:'/home',redirect:'/home'},
+    {path:'/home',component:Home},
     {path: '/city/:cityid',component: City},
     {path:'/service',component:Service},
     {name:'sd',path:'/service/serviceDetail',component:ServiceDetail},
@@ -88,15 +87,15 @@ export default new Router({
 
     {path:'/msite',component:Msite},
     {path:'/food',component:Food},
-    {path:'op',component:Shop},
-    {path:'opopDetail/:shopid',component:ShopDetail},
-    {path:'op/foodDetail',component:FoodDetail},
+    {path:'/shop',component:Shop},
+    {path:'/shop/shopDetail/:shopid',component:ShopDetail},
+    {path:'/shop/foodDetail',component:FoodDetail},
     {path:'/confirmOrder',component:ConfirmOrder},
     {path:'/confirmOrder/payment',component:Payment},
     {path:'/confirmOrder/remark',component:Remark},
-    {path:'/confirmOrderooseAddress',component:ChooseAddress},
-    {path:'/confirmOrderooseAddress/addAddress',component:AddAddress},
-    {path:'/confirmOrderooseAddress/addAddressarchAddress',component:SearchAddress},
+    {path:'/confirmOrder/chooseAddress',component:ChooseAddress},
+    {path:'/confirmOrder/chooseAddress/addAddress',component:AddAddress},
+    {path:'/confirmOrder/chooseAddress/addAddress/searchAddress',component:SearchAddress},
     {path:'/order',component:Order},
     {path:'/order/orderDetail',component:OrderDetail}
   ]

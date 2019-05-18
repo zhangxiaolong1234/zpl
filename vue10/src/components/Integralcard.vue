@@ -2,9 +2,9 @@
     <div class="integralcard">
       <div class="zplson1">
         <!-- < 按钮部分-->
-        <div class="l1">
-          <router-link :to="{path:'/integral'}"><</router-link>
-          <span class="zpl1">积分问题</span>
+        <div  id="head_top">
+          <router-link :to="{path:'/integral'}"><span class="more"> < </span></router-link>
+          <span class="title">积分问题</span>
         </div>
         <ul>
           <li>
@@ -61,14 +61,28 @@
     text-align: center;
     line-height: 2rem;
   }
-  .l1 a{
-    display: block;
-    color: white;
-    font-size: 1.3rem;
-    float:left;
+  #head_top{
+    width: 100%;
+    height: 1.95rem;
+    background-color: #3190e8;
   }
-  .l1 span{
-    color: white;
+  #head_top  .more{
+    width: 10%;
+    color: #fff;
+    height: 1.95rem;
+    margin-left:.1rem;
+    display:block;
+    position: absolute;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    height: 1.95rem;
+    line-height:1.95rem ;
+    font-size: .8rem;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
   }
   ul li {
     list-style: none;

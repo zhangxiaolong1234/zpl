@@ -1,11 +1,11 @@
 <template>
     <div class="SearchMaster">
       <div id="head_top">
-        <router-link :to="{path:''}"><span class="more"> < </span></router-link>
+        <a @click="backUp"><span class="more"> < </span></a>
         <span class="title">搜索</span>
       </div>
       <div class="search">
-        <input type="text"  @input="write" v-model="value">
+        <input type="text"  @input="write" v-model="value" @click="clickinput">
         <span class="close" v-show="shower" @click="closevalue">x</span>
         <button @click="SearchInfor">提交</button>
       </div>
@@ -13,19 +13,18 @@
       <h3 v-show="h3">搜索历史</h3>
       <div class="history" v-show="shower2">
           <div class="list" v-for="(li,index) in historyList">
-          <p class="li" >
-            <span class="li1">{{li}}</span>
-            <span class="li2"  @click="closeliHistory()">x</span>
-          </p>
+              <p class="li" >
+                <span class="li1">{{li}}</span>
+                <span class="li2"  @click="closeliHistory(li,index)">x</span>
+              </p>
         </div>
-        <p class="lihis" @click="closeHistory">清空搜索历史</p>
+        <p class="lihis" @click="closeHistory" v-show="clearHistory">清空搜索历史</p>
       </div>
 
       <!--无搜索结果-->
       <div class="noneResult" v-show="noneResult">很抱歉，无搜索结果</div>
       <!--搜索商家列表-->
-      <!--<h3 v-show="h3">搜索历史</h3>-->
-      <div class="list2" v-for="(li,index) in this.MasterInfor" v-show="shop">
+      <div class="list2" v-for="(li,index) in this.MasterInfor" v-show="shop" @click="enterShop(li,index)">
         <div class="pic"><img :src="'//elm.cangdu.org/img/'+li.image_path" alt=""></div>
         <div class="shopinfor">
         <p>{{li.name}}</p>
@@ -33,21 +32,22 @@
           <p>{{li.float_minimum_order_amount}}元起送/{{li.distance}}公里</p>
         </div>
       </div>
-
+      <Footer></Footer>
     </div>
 </template>
 
 <script>
   import  Vue from  'vue';
+  import Footer from "./Footer";
     export default {
         name: "SearchMaster",
+      components: {Footer},
       data(){
           return{
             h3:false,
             clearHistory:false,
             shower:false,
             shower2:false,
-            lishow:true,
             noneResult:false,
             shop:false,
             MasterInfor:'',
@@ -55,10 +55,17 @@
             historyList:[],
             image_path:'',
             name:'',
-            index:''
+            index:'',
+            lalo:'',
           }
       },
       methods:{
+        backUp(){
+          this.$router.go(-1);
+        },
+        clickinput(){
+          this.value='';
+        },
         write(){
           if(this.value!=''&&this.value!='请输入商家或美食名称'){
             this.shower=true;
@@ -73,8 +80,14 @@
           this.h3=true;
           this.shop=false;
           this.shower2=true;
+          this.clearHistory=true;
         },
-        closeliHistory(){
+        closeliHistory(li,index){
+          this.historyList.splice(index,1);
+          if(this.historyList.length==0){
+            this.clearHistory=false,
+              this.h3=false;
+          }
         },
         closeHistory(){
           this.shower2=false;
@@ -87,23 +100,29 @@
           this.h3=false;
           this.clearHistory=false,
           Vue.axios.get('https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword='+this.value).then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             this.MasterInfor=res.data;
             if(this.MasterInfor.message=='关键词参数错误'){
+              this.noneResult=true;
+            }else if(this.MasterInfor.message=='搜索餐馆数据失败'){
+              this.noneResult=true;
+            }else if(this.MasterInfor.length==0){
               this.noneResult=true;
             }else{
               this.shop=true;
             }
           });
+        },
+        enterShop(li,index){
+         this.lalo=li.latitude+','+li.longitude;
+          console.log(this.lalo);
+          this.$router.push({path:'/shop',query:{geohash:this.lalo,id:li.id}});
         }
       }
     }
 </script>
 
 <style scoped>
-  .hideDiv {
-    display: none;
-  }
   .SearchMaster{
     width: 100%;
     background-color: #f5f5f5;
