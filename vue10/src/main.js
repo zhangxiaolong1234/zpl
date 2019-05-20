@@ -49,10 +49,10 @@ const store = new Vuex.Store({
   },
   mutations: {
     hisList(state,historyList){
-      state.historyList = historyList
+      state.historyList = historyList;
     },
     SetMsg(state, user_name) {
-      state.user_name = user_name
+      state.user_name = user_name;
     },
     setUserName(state,username) {
       state.username = username;
