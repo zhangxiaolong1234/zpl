@@ -44,14 +44,22 @@ const store = new Vuex.Store({
     choosedAddress: null,
     //选择地址的index
     addressIndex: null,
-    orderMessage: null
+    orderMessage: null,
+    cityid:null
   },
   mutations: {
+    hisList(state,historyList){
+      state.historyList = historyList
+    },
     SetMsg(state, user_name) {
       state.user_name = user_name
     },
-    setUserName(state,username){
+    setUserName(state,username) {
       state.username = username;
+    },
+    //存储城市id
+    saveCityid(state,cityid){
+      state.cityid = cityid;
     },
     //记录用户信息
     recordUserInfo(state, info) {

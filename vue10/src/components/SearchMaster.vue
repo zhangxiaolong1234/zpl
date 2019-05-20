@@ -1,13 +1,15 @@
 <template>
     <div class="SearchMaster">
-      <div id="head_top">
-        <a @click="backUp"><span class="more"> < </span></a>
-        <span class="title">搜索</span>
-      </div>
-      <div class="search">
-        <input type="text"  @input="write" v-model="value" @click="clickinput">
-        <span class="close" v-show="shower" @click="closevalue">x</span>
-        <button @click="SearchInfor">提交</button>
+      <div class="fix">
+        <div id="head_top">
+          <a @click="backUp"><span class="more"> < </span></a>
+          <span class="title">搜索</span>
+        </div>
+        <div class="search">
+          <input type="text"  @input="write" v-model="value" @click="clickinput">
+          <span class="close" v-show="shower" @click="closevalue">x</span>
+          <button @click="SearchInfor">提交</button>
+        </div>
       </div>
       <!--搜索历史列表-->
       <div class="searchHistoryList">
@@ -61,15 +63,23 @@
             lalo:'',
           }
       },
-      mounted(){
-          console.log('111',this.historyList);
-        //this.historyList=this.$store.state.historyList;
-        if(this.historyList.length!=0){
+      created(){
+        this.historyList=this.$store.state.historyList;
+        this.shower2=true;
+        //console.log('111',this.historyList);
+        if(this.historyList!=[]){
           this.clearHistory=true,
             this.h3=true;
-          this.$store.commit('historyList',this.historyList);
+
+          this.$store.commit('hisList',this.historyList);
+        }else{
+          this.clearHistory=false,
+            this.h3=false;
         }
       },
+      // mounted(){
+      //
+      // },
       methods:{
         backUp(){
           this.$router.go(-1);
@@ -83,7 +93,6 @@
           }
         },
         closevalue(){
-          this.historyList.splice(0,0,this.value);
           //console.log(this.historyList);
           this.value='请输入商家或美食名称';
           this.shower=false;
@@ -101,11 +110,17 @@
           }
         },
         closeHistory(){
+          this.historyList=[];
+          this.$store.commit('hisList',this.historyList);
           this.shower2=false;
           this.clearHistory=false,
             this.h3=false;
         },
         SearchInfor(){
+          if(this.value!='请输入商家或美食名称'){
+            this.historyList.splice(0,0,this.value);
+            this.$store.commit('hisList',this.historyList);
+          }
           this.shower2=false;
           this.noneResult=false;
           this.h3=false;
@@ -142,6 +157,13 @@
     width: 100%;
     background-color: #f5f5f5;
     animation: allShow 1s ease-in-out;
+    position: relative;
+  }
+  .fix{
+    width: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
   }
   #head_top{
     width: 100%;
@@ -202,6 +224,13 @@
     background-color: #3190e8;
     font-weight: 700;
     padding: 0 .25rem;
+  }
+  .searchHistoryList{
+    width: 100%;
+    /*height:70%;*/
+    /*background-color: red;*/
+    margin-top:5rem;
+    margin-bottom: 2rem;
   }
   h3{
     font-size: .6rem;

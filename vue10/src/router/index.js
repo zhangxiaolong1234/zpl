@@ -91,8 +91,9 @@ export default new Router({
     {path:'/confirmOrder/payment',component:Payment},
     {path:'/confirmOrder/remark',component:Remark},
     {path:'/confirmOrder/chooseAddress',component:ChooseAddress},
-    {path:'/confirmOrder/chooseAddress/addAddress',component:AddAddress},
-    {path:'/confirmOrder/chooseAddress/addAddress/searchAddress',component:SearchAddress},
+    {path:'/confirmOrder/chooseAddress/addAddress',component:AddAddress,children:[
+        {path:'searchAddress',component:SearchAddress}
+      ]},
     {path:'/order',component:Order},
     {path:'/order/orderDetail',component:OrderDetail}
   ]
