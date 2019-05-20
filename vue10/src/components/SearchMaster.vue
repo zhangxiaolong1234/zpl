@@ -66,8 +66,8 @@
       created(){
         this.historyList=this.$store.state.historyList;
         this.shower2=true;
-        //console.log('111',this.historyList);
-        if(this.historyList!=[]){
+        console.log('111',this.historyList);
+        if(this.historyList.length!=0){
           this.clearHistory=true,
             this.h3=true;
 
