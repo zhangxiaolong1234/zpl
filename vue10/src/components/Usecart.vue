@@ -71,6 +71,12 @@
 </script>
 
 <style scoped>
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
   *{
     padding: 0;
     margin: 0;
@@ -177,6 +183,7 @@
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
     padding-top: 1rem;
+    animation: tipMove .4s ;
   }
   .zpl9 button{
     font-size: .8rem;

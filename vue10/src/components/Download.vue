@@ -39,6 +39,12 @@
 </script>
 
 <style scoped>
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
   *{
     padding: 0;
     margin: 0;
@@ -81,15 +87,6 @@
     float:left;
     background: #3190e8;
   }
-  .zpl1{
-    width: 90%;
-    font-size: 1rem;
-    color: white;
-    float:left;
-    background: #3190e8;
-    text-align: center;
-    line-height: 1.5rem;
-  }
   .zpl2{
     width: 50%;
     height: 8rem;
@@ -117,16 +114,30 @@
     margin-top: .5rem;
   }
   .zpl4{
-    width: 60%;
+    width: 70%;
     background: white;
     font-size: 0.7rem;
     text-align: center;
     position: absolute;
     bottom:11rem;
-    left: 3rem;
+    left: 2.5rem;
+    animation: tipMove .4s ;
   }
   .zpl4 img{
     width: 50%;
     margin-top: 0.5rem;
+  }
+  button{
+    width: 90%;
+    height: 2.2rem;
+    line-height: 1.3rem;
+    font-size: .7rem;
+    color: #fff;
+    background-color: #4cd964;
+    border-radius: .15rem;
+    text-align: center;
+    margin-top: 1rem;
+    outline: none;
+    border: 0;
   }
 </style>

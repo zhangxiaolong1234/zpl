@@ -61,6 +61,15 @@
             lalo:'',
           }
       },
+      mounted(){
+          console.log('111',this.historyList);
+        //this.historyList=this.$store.state.historyList;
+        if(this.historyList.length!=0){
+          this.clearHistory=true,
+            this.h3=true;
+          this.$store.commit('historyList',this.historyList);
+        }
+      },
       methods:{
         backUp(){
           this.$router.go(-1);
@@ -125,9 +134,14 @@
 </script>
 
 <style scoped>
+  @keyframes allShow{
+    0%   { opacity: 0 }
+    100% {opacity: 1}
+  }
   .SearchMaster{
     width: 100%;
     background-color: #f5f5f5;
+    animation: allShow 1s ease-in-out;
   }
   #head_top{
     width: 100%;

@@ -117,8 +117,8 @@
               this.alertText = '验证码不正确';
             }else {
               this.$store.commit("recordUserInfo",res.data);
-              this.showAlert = true;
-              this.alertText = res.data.message;
+             this.$store.commit('setUserName',this.username);
+             console.log( this.$store.state.username);
               this.$router.go(-1);
             }
           }).catch((err)=>{

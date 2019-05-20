@@ -146,6 +146,12 @@
 </script>
 
 <style scoped>
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
   .reset{
     width:100%;
     height: 100%;
@@ -195,6 +201,7 @@
     bottom: 9rem;
     text-align: center;
     padding-top: 1rem;
+    animation: tipMove .4s ;
 
   }
   .zpl2 button{
@@ -249,18 +256,18 @@
     font-size: 0.7rem;
   }
   button{
-    width: 90%;
-    height: 2.2rem;
-    line-height: 1.3rem;
-    font-size: .7rem;
-    color: #fff;
-    background-color: #4cd964;
-    border-radius: .15rem;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 1rem;
-    outline: none;
-    border: 0;
+     width: 90%;
+     height: 2.2rem;
+     line-height: 1.3rem;
+     font-size: .7rem;
+     color: #fff;
+     background-color: #4cd964;
+     border-radius: .15rem;
+     text-align: center;
+     margin-left: 5%;
+     margin-top: 1rem;
+     outline: none;
+     border: 0;
 
-  }
+   }
 </style>

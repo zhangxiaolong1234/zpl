@@ -3,7 +3,7 @@
       <div id="head_top">
         <routerLink :to="{path:'/wode/info'}" class="more"> < </routerLink>
         <span class="title">修改用户名</span>
-        <p ><input type="text" id="input" placeholder="请输入用户名" v-model='msg' @change='inputMsg'></p>
+        <p ><input type="text" id="input" placeholder="请输入用户名" v-model='username' @change='inputMsg'></p>
         <p class="txt" v-if="earn">用户名只能修改一次（5-24字符之间）</p>
         <p class="txt2" v-else>用户名长度在5到24位之间</p>
         <button class="btn btn-primary"  @click="inputMsg">确认修改</button>
@@ -17,7 +17,7 @@
       data(){
       return{
         earn:true,
-        msg:''
+        username:''
         }
       },
       methods:{
@@ -32,8 +32,8 @@
 
         },
         inputMsg(){
-          this.$store.state.username=this.msg;
-          this.$router.push("/wode/info")
+          this.$store.commit('setUserName',this.username);
+          this.$router.push("/wode/info");
         }
 
       }

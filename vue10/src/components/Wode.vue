@@ -1,7 +1,9 @@
 <template>
     <div class="p1">
       <!--<Benefit></Benefit>-->
-      <router-view></router-view>
+      <transition name='transitionName' keep-alive>
+        <router-view></router-view>
+      </transition>
         <!--头部,展示子组件-->
       <!--第一导航栏部分-->
       <div id="head_top">
@@ -57,7 +59,7 @@
        </div>
        </router-link>
        <br>
-       <router-link :to="{path:'/'}">
+       <router-link :to="{path:'/download'}">
        <div  class="el-icon-s-goods">
            积分商城
          <span>></span>
@@ -123,18 +125,22 @@
           this.$router.go(-1);
         },
         WhatName(){
-          // if(this.$store.state.username == null){
-          //   this.$store.state.username= '注册/登录';
+          if(this.$store.state.username != null){
+            this.flag=this.$store.state.username;
+          }
+          // else{
+          //   this.flag= '注册/登录';
           // }
+
           Vue.axios.get('https://elm.cangdu.org/v1/user').then((res)=>{
             //console.log(res.data.username);
-            this.name=res.data.username;
-            if(this.name == undefined){
+            if(res.data.username == undefined){
+              this.flag=res.data.username;
               this.flag = '注册/登录';
-              //this.$store.state.username= '注册/登录';
-            }else{
-              this.flag = this.name;
             }
+            // else{
+            //   this.flag = this.name;
+            // }
           }).catch((err)=>{
             console.log('请求错误',err);
           });
@@ -144,11 +150,9 @@
             this.hongbao = res.data;
             this.$store.state.youhui = this.hongbao;
           });
-          //this.flag=this.$store.state.username;
         },
         sendUser(){
           if(this.flag!='注册/登录'){
-            this.$store.state.username =this.flag;
             this.$router.push("/wode/info");
           }else{
             this.$router.push("/register");
@@ -161,6 +165,10 @@
 </script>
 
 <style scoped>
+  @keyframes allShow{
+    0%   { opacity: 0 }
+    100% {opacity: 1}
+  }
 .p1{
   width: 100%;
   height: 100%;
@@ -171,6 +179,7 @@
   bottom: 0;
   z-index: 2;
   overflow: hidden;
+  animation: allShow 1s ease-in-out;
 }
 #head_top{
   width: 100%;

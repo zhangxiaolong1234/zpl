@@ -18,6 +18,13 @@
 
       </div>
       <button class="btn btn-success" @click="inputMsg1">添加地址</button>
+      <!--弹框-->
+      <div class="zpl8" v-if=" showAlert">
+        <img src="../images/images/警告.png" alt="">
+        <div v-text="alertText"></div>
+        <button @click="aaa">确认</button>
+      </div>
+
     </div>
 </template>
 
@@ -35,6 +42,8 @@
             addetail:'',
             phoneNum:'',
             phoneNum2:'',
+            showAlert: false, //显示提示框组件
+            alertText: null, //提示的内容
           }
       },
       mounted(){
@@ -44,8 +53,17 @@
       },
       methods:{
         inputMsg1(){
-          if(this.nameadd!=''&&this.address!=''&&this.phoneNum.length==11){
+          if(this.nameadd ==''){
             //console.log('123',this.$route.params.pro);
+            this.showAlert = true;
+            this.alertText = '请填写你的姓名';
+          }else if(this.$route.params.pro ==undefined){
+            this.showAlert = true;
+            this.alertText = '请填写你的地址';
+          }else if(this.phoneNum.length!=11){
+            this.showAlert = true;
+            this.alertText = '请输入正确的手机号码';
+          }else{
             //    发送axios请求
             Vue.axios.post('https://elm.cangdu.org/v1/users/'+this.userID+'/addresses',{
               //把自定义的变量赋值给数据库的参数
@@ -59,23 +77,61 @@
               'sex':1,
               'tag_type':2,
             }).then((res)=>{
-              console.log(res.data);
+             // console.log(res.data);
               if(res.data){
                 this.$router.push("/wode/info/changeAdd");
+                //console.log(this.$route.params.pro);
               }
             }).catch((err)=>{
               console.log('请求错误',err);
             });
           }
 
+          },
 
-          }
+        aaa(){
+          this.showAlert = !this.showAlert;
+        },
       },
 
     }
 </script>
 
 <style scoped>
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
+  .zpl8{
+    width: 12rem;
+    height: 8.5rem;
+    background: white;
+    position: absolute;
+    left: 2.5rem;
+    bottom: 8rem;
+    text-align: center;
+    animation: tipMove .4s ;
+  }
+  .zpl8 button{
+    margin-top: 1rem;
+    width: 90%;
+    height: 2.2rem;
+    line-height: 1.3rem;
+    font-size: .7rem;
+    color: #fff;
+    background-color: #4cd964;
+    border-radius: .15rem;
+    text-align: center;
+    margin-left: 5%;
+    outline: none;
+    border: 0;
+  }
+  .zpl8 img{
+    width: 35%;
+    height: 4rem;
+  }
   .AppendAdd{
     width: 100%;
     height: 100%;

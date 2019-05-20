@@ -6,16 +6,18 @@
         <span class="title">编辑地址</span>
         <span class="emd" @click="changeBtn" v-text="text1">{{text1}}</span>
       </div>
-          <div class="addp"  v-show="showa" v-for="(li,index) in this.AddArrs" :key="index">
-            <div class="left">
-              <p><span>{{li.name}}</span></p>
-              <p><span>{{li.phone}}</span></p>
-            </div>
-            <div class="right">
-              <span class="del" @click="changeShow(li,index)" v-show="dele">x</span>
-            </div>
-            <div class="clear"></div>
+      <div class="addArrs">
+        <div class="addp"  v-show="showa" v-for="(li,index) in this.AddArrs" :key="index">
+          <div class="left">
+            <p><span>{{li.name}}</span></p>
+            <p><span>{{li.phone}}</span></p>
           </div>
+          <div class="right">
+            <span class="del" @click="changeShow(li,index)" v-show="dele">x</span>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
           <div class="addname">
             <router-link :to="{path:'/wode/info/changeAdd/appendAdd/:adressLi'}">
               <div class="left" @click="addBtn"><span>新增地址</span></div>
@@ -74,8 +76,9 @@
             console.log(li.id,index);
           Vue.axios.delete('https://elm.cangdu.org/v1/users/'+this.userID+'/addresses/'+li.id).then((res)=>{
             console.log(res.data);
+            //this.showa=false;
+            this.AddArrs.splice(index,1);
           });
-          this.showa=false;
         },
         addBtn(){
           this.$router.push('/wode/info/changeAdd');
@@ -87,7 +90,6 @@
 <style scoped>
   .ChangeAdd{
     width: 100%;
-    height: 100%;
     font-size: .6rem;
     color: #333;
     font-weight: 500;

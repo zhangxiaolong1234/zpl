@@ -53,15 +53,12 @@ export default new Router({
     {name:'sd',path:'/service/serviceDetail',component:ServiceDetail},
     {path:'/reset',component:Reset},
     {path:'/register',component: Register},
-    {path:'/wode',component:Wode,children:[
-        {path:'info',component:Info,children:[
-            {path:'changeName',component:ChangeName},
-            {path:'changeAdd',component:ChangeAdd,children:[
-                {path:'appendAdd/:adressLi', name:'apd',component:AppendAdd,children:[
-                    {path:'searchAdd',component:SearchAdd}
-                  ]}
-              ]},
-          ]},
+    {path:'/wode',component:Wode},
+    {path:'/wode/info',component:Info},
+    {path:'/wode/info/changeName',component:ChangeName},
+    {path:'/wode/info/changeAdd',component:ChangeAdd},
+    {path:'/wode/info/changeAdd/appendAdd/:adressLi', name:'apd',component:AppendAdd,children:[
+      {path:'searchAdd',component:SearchAdd}
       ]},
     {path:'/balance',component:Balance,children:[
         {path:'balancecard',component:Balancecard},

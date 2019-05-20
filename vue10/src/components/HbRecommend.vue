@@ -43,7 +43,7 @@
       <div class="zpl13" v-if="showAlert">
         <img src="../images/images/警告.png" alt="">
         <div v-text="alertText"></div>
-        <button style="width: 12rem;background: green" @click="hide">确认</button>
+        <button style="width: 12rem" @click="hide">确认</button>
       </div>
     </div>
 </template>
@@ -105,12 +105,31 @@
     width: 100%;
     height: 6rem;
   }
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
   .zpl3{
     width: 100%;
     background: white;
     margin-top: 0.3rem;
     overflow: hidden;
     padding: 0.3rem;
+  }
+  button{
+    width: 90%;
+    height: 2.2rem;
+    line-height: 1.3rem;
+    font-size: .7rem;
+    color: #fff;
+    background-color: #4cd964;
+    border-radius: .15rem;
+    text-align: center;
+    margin-top: 1rem;
+    outline: none;
+    border: 0;
   }
   .zpl4,.zpl5,.zpl6{
     width: 33%;
@@ -163,10 +182,12 @@
     height: 8.5rem;
     background: white;
     font-size: 0.7rem;
+    border-radius: .3rem;
     position: absolute;
     left: 2.5rem;
     bottom: 15rem;
     text-align: center;
+    animation: tipMove .4s ;
   }
   .zpl13 button{
     font-size: 1rem;

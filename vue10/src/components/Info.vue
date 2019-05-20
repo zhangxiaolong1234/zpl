@@ -14,7 +14,7 @@
           <!--<input type="file" id="file">-->
           <!--</lable>-->
           <img  src="../images/images/8.png" alt="">
-          <input type="file" id="file">
+          <input type="file" id="file" @change="uploadAvatar" class="inputimg">
           <span class="icon"> > </span>
         </div>
       </div>
@@ -30,13 +30,13 @@
         </div>
         <div class="clear"></div>
       </router-link>
-
     </div>
+
     <div class="add">
       <router-link :to="{path:'/wode/info/changeAdd'}">
         <div class="left left2"><span>收货地址</span></div>
         <div class="right right2">
-          <span class="name">{{this.firstadd}}</span>
+          <!--<span class="name">{{this.firstadd}}</span>-->
           <span class="icon"> > </span>
         </div>
         <div class="clear"></div>
@@ -86,6 +86,8 @@
   import ChangeAdd from "./ChangeAdd";
   export default {
     name: "Info",
+    showAlert: false, //显示提示框组件
+    alertText: null, //提示的内容
     components: {ChangeName,ChangeAdd},
     data(){
       return{
@@ -111,6 +113,20 @@
     methods:{
       backUp(){
         this.$router.push('/wode');
+      },
+      uploadAvatar(){
+        //上传头像
+
+          Vue.axios.post('https://elm.cangdu.org/v1/addimg/:avatar', {
+            'image_path': '15bfafa418322.jpeg'
+          }).then((res) => {
+            console.log(res.data);
+          }).catch((err) => {
+            this.showAlert = true;
+            this.alertText = '上传失败';
+            console.log('请求错误',err);
+          });
+
       },
       changeAdd(){
         this.name=this.$store.state.username;
@@ -154,6 +170,16 @@
 </script>
 
 <style scoped>
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
+  @keyframes allShow{
+    0%   { opacity: 0 }
+    100% {opacity: 1}
+  }
   .UserInfor{
     width: 100%;
     height: 100%;
@@ -165,6 +191,7 @@
     left: 0;
     top: 0;
     z-index: 1;
+    animation: allShow .8s ease-in-out;
   }
   #head_top{
     width: 100%;
@@ -291,6 +318,7 @@
     border: 1px;
     border-radius: .25rem;
     border:1px solid #eee;
+    animation: tipMove .4s ;
   }
   .fail img{
     margin-bottom: .5rem;

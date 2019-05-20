@@ -27,7 +27,7 @@
     <div class="fail" v-show="showAlert">
       <img src="../images/images/警告.png" alt="">
       <p>快去下单赚取大量积分</p>
-      <button class="btn btn-success btn2" @click="sure">确定</button>
+      <button class="btn btn2" @click="sure">确定</button>
     </div>
   </div>
 </template>
@@ -59,6 +59,12 @@
 </script>
 
 <style scoped>
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
   .balance{
     width: 100%;
     height: 100%;
@@ -181,6 +187,7 @@
     border: 1px;
     border-radius: .25rem;
     border:1px solid #eee;
+    animation: tipMove .4s ;
   }
   .fail img{
     margin-bottom: .5rem;
@@ -195,5 +202,6 @@
     line-height: .8rem;
     border-top-left-radius: 0;
     border-top-right-radius:0;
+    background-color: #4cd964;
   }
 </style>

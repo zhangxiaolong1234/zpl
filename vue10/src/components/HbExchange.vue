@@ -102,6 +102,12 @@
 </script>
 
 <style scoped>
+  @keyframes tipMove{
+    0%   { transform: scale(1) }
+    35%  { transform: scale(.8) }
+    70%  { transform: scale(1.1) }
+    100% { transform: scale(1) }
+  }
   *{
     padding: 0;
     margin: 0;
@@ -173,14 +179,28 @@
     margin: 1rem 5% 1rem 5%;
     background-color: #5555;
   }
+  button{
+    width: 90%;
+    height: 2.2rem;
+    line-height: 1.3rem;
+    font-size: .7rem;
+    color: #fff;
+    background-color: #4cd964;
+    border-radius: .15rem;
+    text-align: center;
+    margin-top: 1rem;
+    outline: none;
+    border: 0;
+  }
   .zpl7{
     width: 12rem;
     height: 8.5rem;
     background: white;
     position: absolute;
-    left: 2.5rem;
+    left: 2rem;
     bottom: 12rem;
     text-align: center;
+    animation: tipMove .4s ;
   }
   .zpl7 button{
     color: white;

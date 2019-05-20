@@ -17,6 +17,7 @@ const store = new Vuex.Store({
   state: {
     youhui: [],//有几张优惠券
     user_name: '',
+    historyList:[],
     addlist: [],
     AddArr: {},
     firstadd: '',
@@ -48,6 +49,9 @@ const store = new Vuex.Store({
   mutations: {
     SetMsg(state, user_name) {
       state.user_name = user_name
+    },
+    setUserName(state,username){
+      state.username = username;
     },
     //记录用户信息
     recordUserInfo(state, info) {
