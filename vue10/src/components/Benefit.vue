@@ -130,6 +130,10 @@
 </script>
 
 <style scoped>
+  @keyframes allShow{
+    0%   { opacity: 0 }
+    100% {opacity: 1}
+  }
   *{
     padding: 0;
     margin: 0;
@@ -142,6 +146,7 @@
     left: 0;
     top: 0;
     z-index: 2;
+    animation: allShow 1s ease-in-out;
   }
   #head_top{
     width: 100%;

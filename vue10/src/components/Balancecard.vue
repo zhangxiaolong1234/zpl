@@ -41,6 +41,10 @@
 </script>
 
 <style scoped>
+  @keyframes allPush{
+    0%   { left: 100% }
+    100% { left: 0}
+  }
   *{
     padding: 0;
     margin: 0;
@@ -54,6 +58,7 @@
     right: 0;
     bottom: 0;
     z-index: 2;
+    animation: allPush .3s ease-in-out;
   }
   .zplson1{
     width: 100%;

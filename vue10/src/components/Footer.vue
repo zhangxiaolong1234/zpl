@@ -1,6 +1,6 @@
 <template>
       <section id="foot_guide">
-        <section class="guide_item" @click = "gotoAddress({path: '/msite', query: {geohash}})">
+        <section class="guide_item activity" @click = "gotoAddress({path: '/msite', query: {geohash}})">
           <Icon type="ios-home-outline" />
           <span>外卖</span>
         </section>
@@ -62,6 +62,9 @@
      height: .8rem;
      margin-top: .3rem;
      color: black;
+   }
+   .activity .ivu-icon {
+     color: blue;
    }
    .guide_item span {
      font-size: .45rem;

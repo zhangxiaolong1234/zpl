@@ -39,10 +39,15 @@
 </script>
 
 <style scoped>
+  @keyframes allShow{
+    0%   { opacity: 0 }
+    100% {opacity: 1}
+  }
   .balance{
     width: 100%;
     height: 100%;
     background:#f5f5f5;
+    animation: allShow 1s ease-in-out;
   }
   .zplson1{
     width: 100%;

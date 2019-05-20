@@ -124,7 +124,7 @@
                       <span>{{foods.specfoods[0].price}}</span>
                       <span v-if="foods.specifications.length">起</span>
                     </section>
-                    <BuyCart :shopId="shopId" :foods="foods" :shopName="shopDetailData.name" :imgPath="imgPath" @showChooseList="showChooseList"></BuyCart>
+                    <BuyCart :shopId="shopId" :foods="foods" :shopName="shopDetailData.name" :imgPath="imgPath" @showChooseList="showChooseList" ></BuyCart>
                   </footer>
                 </section>
                 <!--购物车列表-->

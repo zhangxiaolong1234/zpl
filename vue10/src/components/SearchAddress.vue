@@ -1,59 +1,64 @@
 <template>
-    <div class="searchAddress_container">
-      <Head head-title="搜索" go-back="true"></Head>
-      <form class="form_search">
-        <input type="search" name="search" placeholder="请输入小区/写字楼/学校等" v-model="searchValue">
-        <button @click.prevent="searchPlace()">搜索</button>
-      </form>
-      <ul class="address_list" v-if="searchData">
-        <li v-for="(item,index) in searchData" :key="index" @click="choosedAddress(item)">
-          <h4>{{item.name}}</h4>
-          <p>{{item.address}}</p>
-        </li>
-      </ul>
-      <div v-else class="empty_tips">
-        <p>找不到地址？</p>
-        <p>尝试输入小区、写字楼或学校名</p>
-        <p>详细地址（如门牌号等）可稍后输入哦</p>
-      </div>
+  <div class="searchAddress_container">
+    <Head head-title="搜索" go-back="true"></Head>
+    <form class="form_search">
+      <input type="search" name="search" placeholder="请输入小区/写字楼/学校等" v-model="searchValue">
+      <button @click.prevent="searchPlace()">搜索</button>
+    </form>
+    <ul class="address_list" v-if="searchData">
+      <li v-for="(item,index) in searchData" :key="index" @click="choosedAddress(item)">
+        <h4>{{item.name}}</h4>
+        <p>{{item.address}}</p>
+      </li>
+    </ul>
+    <div v-else class="empty_tips">
+      <p>找不到地址？</p>
+      <p>尝试输入小区、写字楼或学校名</p>
+      <p>详细地址（如门牌号等）可稍后输入哦</p>
     </div>
+  </div>
 </template>
 
 <script>
-    import Vue from 'vue';
-    import Head from "../Header/Head";
-    export default {
-        name: "SearchAddress",
-        components: {Head},
-        data() {
-          return {
-            //输入框的内容
-            searchValue:'',
-            //搜索的结果
-            searchData:''
-          }
-        },
-        methods: {
-          searchPlace() {
-              if(this.searchValue) {
-                Vue.axios.get('https://elm.cangdu.org/v1/pois?cityid=1&keyword='+this.searchValue+'&type=search').then((res)=>{
-                  // console.log(res.data);
-                  this.searchData = res.data;
-                })
-              }
-          },
-          choosedAddress(item) {
-              this.$store.commit("chooseAddress",item);
-              this.$router.go(-1);
-          }
+  import Vue from 'vue';
+  import Head from "../Header/Head";
+  export default {
+    name: "SearchAddress",
+    components: {Head},
+    data() {
+      return {
+        //输入框的内容
+        searchValue:'',
+        //搜索的结果
+        searchData:'',
+        cityid:null
+      }
+    },
+    mounted() {
+      this.cityid = this.$store.state.cityid;
+    },
+    methods: {
+      searchPlace() {
+        if(this.searchValue) {
+          Vue.axios.get('https://elm.cangdu.org/v1/pois?cityid='+parseInt(this.cityid)+'&keyword='+this.searchValue+'&type=search').then((res)=>{
+            // console.log(res.data);
+            this.searchData = res.data;
+          })
         }
+      },
+      choosedAddress(item) {
+        this.$store.commit("chooseAddress",item);
+        // console.log(item);
+        this.$router.go(-1);
+      }
     }
+  }
 </script>
 
 <style scoped>
-   p,ul,h4 {
-     margin-bottom: 0;
-   }
+  p,ul,h4 {
+    margin-bottom: 0;
+  }
   .searchAddress_container {
     position: fixed;
     top: 0;

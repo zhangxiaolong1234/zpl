@@ -1,7 +1,7 @@
 <template>
     <div class="ChangeName">
       <div id="head_top">
-        <routerLink :to="{path:'/wode/info'}" class="more"> < </routerLink>
+        <a @click="backUp"> <span class="more"> < </span> </a>
         <span class="title">修改用户名</span>
         <p ><input type="text" id="input" placeholder="请输入用户名" v-model='username' @change='inputMsg'></p>
         <p class="txt" v-if="earn">用户名只能修改一次（5-24字符之间）</p>
@@ -21,6 +21,9 @@
         }
       },
       methods:{
+        backUp(){
+          this.$router.go(-1);
+        },
         inputThing(){
           if(this.inputMsg.length <5 || this.inputMsg.length>24){
             this.earn=false;

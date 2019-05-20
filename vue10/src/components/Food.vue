@@ -110,6 +110,7 @@
                 <ul class="filter_ul" style="paddingBottom: .5rem;">
                   <li v-for="(item,index) in Activity" :key="index" class="filter_li" @click="selectSupportIds(index, item.id)">
                     <span class="filter_icon" :style="{color: '#' + item.icon_color, borderColor: '#' + item.icon_color}" v-show="!support_ids[index].status">{{item.icon_name}}</span>
+                    <img src="../img/dui2.png" alt="对号" v-show="support_ids[index].status">
                     <span :class="{selected_filter: support_ids[index].status}">{{item.name}}</span>
                   </li>
                 </ul>

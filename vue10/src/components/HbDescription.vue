@@ -66,6 +66,10 @@
 </script>
 
 <style scoped>
+  @keyframes allPush{
+    0%   { left: 100% }
+    100% { left: 0}
+  }
   *{
     padding: 0;
     margin: 0;
@@ -77,6 +81,7 @@
     left:0;
     top: 0;
     z-index: 2;
+    animation: allPush .3s ease-in-out;
   }
   #head_top{
     width: 100%;

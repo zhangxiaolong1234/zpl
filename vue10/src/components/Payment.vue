@@ -85,7 +85,7 @@
           confirmPay() {
             this.showAlert = true;
             this.alertText = '当前环境无法支付，请打开官方APP进行付款';
-            //this.$router.push('/order')
+            this.$router.push('/order');
           }
         }
     }
